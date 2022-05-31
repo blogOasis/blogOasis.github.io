@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blogoasis.github.io/2022/05/31/Reader/the-second-sex/</loc>
+    <loc>https://blogoasis.github.io/post/802edc23.html</loc>
     
     <lastmod>2022-05-31</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://blogoasis.github.io/2022/05/30/Geek/start-myblog/</loc>
+    <loc>https://blogoasis.github.io/post/bf968ce7.html</loc>
     
     <lastmod>2022-05-31</lastmod>
     
@@ -20,7 +20,16 @@
   </url>
   
   <url>
-    <loc>https://blogoasis.github.io/2022/05/31/IDEAS/Inspired/%E4%B8%AD%E5%9B%BD%E6%99%BA%E6%85%A7%E4%B8%8E%E5%BD%93%E4%BB%A3%E7%A4%BE%E4%BC%9A/</loc>
+    <loc>https://blogoasis.github.io/post/bc97fc50.html</loc>
+    
+    <lastmod>2022-05-31</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blogoasis.github.io/post/2454a085.html</loc>
     
     <lastmod>2022-05-31</lastmod>
     
