@@ -99,20 +99,6 @@
   </url>
   
   <url>
-    <loc>https://blogoasis.github.io/tags/%E6%B3%A2%E4%BC%8F%E5%A8%83/</loc>
-    <lastmod>2022-05-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blogoasis.github.io/tags/%E9%98%85%E8%AF%BB/</loc>
-    <lastmod>2022-05-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blogoasis.github.io/tags/%E5%93%B2%E5%AD%A6/</loc>
     <lastmod>2022-05-31</lastmod>
     <changefreq>weekly</changefreq>
@@ -121,6 +107,20 @@
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E4%BA%BA%E6%96%87%E6%83%85%E6%80%80/</loc>
+    <lastmod>2022-05-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blogoasis.github.io/tags/%E6%B3%A2%E4%BC%8F%E5%A8%83/</loc>
+    <lastmod>2022-05-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blogoasis.github.io/tags/%E9%98%85%E8%AF%BB/</loc>
     <lastmod>2022-05-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
