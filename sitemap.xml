@@ -20,15 +20,6 @@
   </url>
   
   <url>
-    <loc>https://blogoasis.github.io/post/802edc23.html</loc>
-    
-    <lastmod>2022-05-31</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blogoasis.github.io/post/bc97fc50.html</loc>
     
     <lastmod>2022-05-31</lastmod>
@@ -92,6 +83,20 @@
 
   
   <url>
+    <loc>https://blogoasis.github.io/tags/%E6%B3%A2%E4%BC%8F%E5%A8%83/</loc>
+    <lastmod>2022-05-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blogoasis.github.io/tags/%E9%98%85%E8%AF%BB/</loc>
+    <lastmod>2022-05-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blogoasis.github.io/tags/%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2022-05-31</lastmod>
     <changefreq>weekly</changefreq>
@@ -112,31 +117,17 @@
     <priority>0.2</priority>
   </url>
   
-  <url>
-    <loc>https://blogoasis.github.io/tags/%E6%B3%A2%E4%BC%8F%E5%A8%83/</loc>
-    <lastmod>2022-05-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blogoasis.github.io/tags/%E9%98%85%E8%AF%BB/</loc>
-    <lastmod>2022-05-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
 
   
   <url>
-    <loc>https://blogoasis.github.io/categories/Geek/</loc>
+    <loc>https://blogoasis.github.io/categories/Reader/</loc>
     <lastmod>2022-05-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blogoasis.github.io/categories/Reader/</loc>
+    <loc>https://blogoasis.github.io/categories/Geek/</loc>
     <lastmod>2022-05-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
