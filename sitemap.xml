@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blogoasis.github.io/post/29a0832b.html</loc>
+    
+    <lastmod>2022-07-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blogoasis.github.io/post/c96d2cc6.html</loc>
     
     <lastmod>2022-07-24</lastmod>
@@ -139,7 +148,7 @@
 
   <url>
     <loc>https://blogoasis.github.io/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -147,154 +156,161 @@
   
   <url>
     <loc>https://blogoasis.github.io/tags/mysql/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/navicat/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/Developer/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/OneDrive/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/C/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/C/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/Programming/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E4%BA%8C%E5%88%86/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E7%94%B5%E8%A7%86%E5%89%A7/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E6%97%A5%E5%89%A7/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E8%A7%82%E5%90%8E%E6%84%9F/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E5%A5%B3%E6%80%A7/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E7%BA%AA%E5%BD%95%E7%89%87/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E6%B3%A2%E4%BC%8F%E5%A8%83/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E9%98%85%E8%AF%BB/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E5%93%B2%E5%AD%A6/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E4%BA%BA%E6%96%87%E6%83%85%E6%80%80/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blogoasis.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</loc>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -303,28 +319,28 @@
   
   <url>
     <loc>https://blogoasis.github.io/categories/Geek/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/categories/%E8%A7%82%E5%BD%B1/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/categories/Reader/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blogoasis.github.io/categories/IDEA/</loc>
-    <lastmod>2022-07-24</lastmod>
+    <lastmod>2022-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
