@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blogoasis.github.io/post/1a07e293.html</loc>
+    
+    <lastmod>2022-10-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blogoasis.github.io/about/index.html</loc>
     
     <lastmod>2022-10-13</lastmod>
@@ -140,15 +149,6 @@
     <loc>https://blogoasis.github.io/post/bf968ce7.html</loc>
     
     <lastmod>2022-07-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blogoasis.github.io/post/1a07e293.html</loc>
-    
-    <lastmod>2022-07-01</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
