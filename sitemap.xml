@@ -254,6 +254,20 @@
 
   
   <url>
+    <loc>https://blogoasis.github.io/tags/Game/</loc>
+    <lastmod>2022-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blogoasis.github.io/tags/NieR/</loc>
+    <lastmod>2022-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blogoasis.github.io/tags/%E6%B3%A2%E4%BC%8F%E5%A8%83/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -275,21 +289,7 @@
   </url>
   
   <url>
-    <loc>https://blogoasis.github.io/tags/Game/</loc>
-    <lastmod>2022-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blogoasis.github.io/tags/NieR/</loc>
-    <lastmod>2022-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blogoasis.github.io/tags/C/</loc>
+    <loc>https://blogoasis.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -317,21 +317,28 @@
   </url>
   
   <url>
-    <loc>https://blogoasis.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2022-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blogoasis.github.io/tags/git/</loc>
-    <lastmod>2022-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blogoasis.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
+    <lastmod>2022-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blogoasis.github.io/tags/C/</loc>
+    <lastmod>2022-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blogoasis.github.io/tags/Linux/</loc>
+    <lastmod>2022-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blogoasis.github.io/tags/Vim/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -359,7 +366,7 @@
   </url>
   
   <url>
-    <loc>https://blogoasis.github.io/tags/OneDrive/</loc>
+    <loc>https://blogoasis.github.io/tags/git/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -373,14 +380,7 @@
   </url>
   
   <url>
-    <loc>https://blogoasis.github.io/tags/Linux/</loc>
-    <lastmod>2022-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blogoasis.github.io/tags/Vim/</loc>
+    <loc>https://blogoasis.github.io/tags/OneDrive/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -394,7 +394,7 @@
   </url>
   
   <url>
-    <loc>https://blogoasis.github.io/tags/%E5%8D%9A%E5%AE%A2/</loc>
+    <loc>https://blogoasis.github.io/tags/%E4%BA%8C%E5%88%86/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -429,13 +429,6 @@
   </url>
   
   <url>
-    <loc>https://blogoasis.github.io/tags/%E4%BA%8C%E5%88%86/</loc>
-    <lastmod>2022-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blogoasis.github.io/tags/%E6%97%A5%E5%89%A7/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -444,6 +437,13 @@
   
   <url>
     <loc>https://blogoasis.github.io/tags/%E7%BA%AA%E5%BD%95%E7%89%87/</loc>
+    <lastmod>2022-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blogoasis.github.io/tags/%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -487,14 +487,14 @@
 
   
   <url>
-    <loc>https://blogoasis.github.io/categories/Reader/</loc>
+    <loc>https://blogoasis.github.io/categories/Game/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blogoasis.github.io/categories/Game/</loc>
+    <loc>https://blogoasis.github.io/categories/Reader/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
