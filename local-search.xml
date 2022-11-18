@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>ssh learning</title>
+    <link href="/post/a5271c15.html"/>
+    <url>/post/a5271c15.html</url>
+    
+    <content type="html"><![CDATA[<h2 id="SSH登录"><a href="#SSH登录" class="headerlink" title="SSH登录"></a>SSH登录</h2><p><code>ssh user@hostname</code></p><ul><li><p><code>user</code>：用户名</p></li><li><p><code>hostname</code>：IP地址或域名</p></li></ul><p>之后电脑会将该服务器的信息记录在<code>~/.ssh/known_hosts</code>文件中</p><p>登录某一特定端口：</p><p><code>ssh user@hostname -p 22</code></p><h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>防止每次登录ssh都需要输入一遍<code>user@hostname</code>，ip不容易记忆</p><p>创建文件~&#x2F;.ssh&#x2F;config</p><p>然后在文件中输入：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sh">Host myserver1<br>    HostName IP地址或域名<br>    User 用户名<br><br>Host myserver2<br>    HostName IP地址或域名<br>    User 用户名<br></code></pre></td></tr></table></figure><p>之后再使用服务器时，可以直接使用别名myserver1、myserver2</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Geek</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Developer</tag>
+      
+      <tag>技术</tag>
+      
+      <tag>ssh</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>git learning</title>
     <link href="/post/dbf237bf.html"/>
     <url>/post/dbf237bf.html</url>
@@ -20,11 +49,11 @@
     
     <tags>
       
+      <tag>Developer</tag>
+      
       <tag>技术</tag>
       
       <tag>git</tag>
-      
-      <tag>Developer</tag>
       
     </tags>
     
@@ -78,13 +107,13 @@
     
     <tags>
       
-      <tag>技术</tag>
+      <tag>C++</tag>
       
       <tag>Developer</tag>
       
       <tag>Programming</tag>
       
-      <tag>C++</tag>
+      <tag>技术</tag>
       
     </tags>
     
@@ -109,13 +138,13 @@
     
     <tags>
       
-      <tag>技术</tag>
+      <tag>C++</tag>
       
       <tag>Developer</tag>
       
       <tag>Programming</tag>
       
-      <tag>C++</tag>
+      <tag>技术</tag>
       
     </tags>
     
@@ -167,13 +196,13 @@
     
     <tags>
       
-      <tag>技术</tag>
-      
       <tag>Developer</tag>
       
-      <tag>算法</tag>
-      
       <tag>Programming</tag>
+      
+      <tag>技术</tag>
+      
+      <tag>算法</tag>
       
     </tags>
     
@@ -198,9 +227,9 @@
     
     <tags>
       
-      <tag>技术</tag>
-      
       <tag>Developer</tag>
+      
+      <tag>技术</tag>
       
       <tag>Java</tag>
       
@@ -227,11 +256,11 @@
     
     <tags>
       
-      <tag>技术</tag>
+      <tag>C++</tag>
       
       <tag>Developer</tag>
       
-      <tag>C++</tag>
+      <tag>技术</tag>
       
       <tag>Java</tag>
       
@@ -260,11 +289,11 @@
       
       <tag>电视剧</tag>
       
-      <tag>美剧</tag>
-      
       <tag>观后感</tag>
       
       <tag>女性</tag>
+      
+      <tag>美剧</tag>
       
     </tags>
     
@@ -345,13 +374,13 @@
     
     <tags>
       
-      <tag>技术</tag>
-      
       <tag>Developer</tag>
       
-      <tag>算法</tag>
-      
       <tag>Programming</tag>
+      
+      <tag>技术</tag>
+      
+      <tag>算法</tag>
       
       <tag>动态规划</tag>
       
@@ -378,13 +407,13 @@
     
     <tags>
       
-      <tag>技术</tag>
-      
       <tag>Developer</tag>
       
-      <tag>算法</tag>
-      
       <tag>Programming</tag>
+      
+      <tag>技术</tag>
+      
+      <tag>算法</tag>
       
       <tag>二分</tag>
       
@@ -411,9 +440,9 @@
     
     <tags>
       
-      <tag>技术</tag>
-      
       <tag>Developer</tag>
+      
+      <tag>技术</tag>
       
       <tag>mysql</tag>
       
@@ -446,11 +475,11 @@
       
       <tag>电视剧</tag>
       
+      <tag>日剧</tag>
+      
       <tag>观后感</tag>
       
       <tag>女性</tag>
-      
-      <tag>日剧</tag>
       
     </tags>
     
@@ -502,13 +531,13 @@
     
     <tags>
       
-      <tag>技术</tag>
+      <tag>C++</tag>
       
       <tag>Developer</tag>
       
       <tag>Programming</tag>
       
-      <tag>C++</tag>
+      <tag>技术</tag>
       
       <tag>C#</tag>
       
