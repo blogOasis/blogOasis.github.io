@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>requestparam and requestbody</title>
+    <link href="/post/64c82043.html"/>
+    <url>/post/64c82043.html</url>
+    
+    <content type="html"><![CDATA[<h2 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h2><p>上传图片遇到了一个矛盾：</p><ul><li>为了上传图片，最简单的方法是在自己的类内部把图片上传逻辑写一下，但是以后其他人上传图片，都要写一次</li><li>于是想把上传图片搞一个工具类(工具类不是接口)，但是这样需要把图片和其他请求放到一个请求中（可能是requestbody和requestparam的区别）</li><li>一开始上面不会，所以为了单独上传图片，想把图片相关设置为一个controller接口<br>但是这个图片的controller里面需要知道图片的上传路径，但是路径确是由具体的逻辑把控的，你无法知道将来调用的路径</li><li>所以上传图片不能当作一个接口</li></ul><p>所以看看能不能把图片和其他请求放在一起</p><h2 id="RequestBody"><a href="#RequestBody" class="headerlink" title="RequestBody"></a>RequestBody</h2><p> javadoc states</p><blockquote><p>Annotation indicating a method parameter should be bound to the body of the web request.</p></blockquote><p>这个参数需要和网页请求的请求体绑定起来</p><p>通过HttpMessageConverter把请求体反序列化为参数类型的对象</p><h2 id="RequestParam"><a href="#RequestParam" class="headerlink" title="RequestParam"></a>RequestParam</h2><p>javadoc states</p><blockquote><p>Annotation which indicates that a method parameter should be bound to a web request parameter.</p></blockquote><p>这个方法参数应该绑定到一个网页请求参数上</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Geek</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Developer</tag>
+      
+      <tag>Java</tag>
+      
+      <tag>Spring</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ssh learning</title>
     <link href="/post/a5271c15.html"/>
     <url>/post/a5271c15.html</url>
@@ -20,9 +49,9 @@
     
     <tags>
       
-      <tag>Developer</tag>
-      
       <tag>技术</tag>
+      
+      <tag>Developer</tag>
       
       <tag>ssh</tag>
       
@@ -49,9 +78,9 @@
     
     <tags>
       
-      <tag>Developer</tag>
-      
       <tag>技术</tag>
+      
+      <tag>Developer</tag>
       
       <tag>git</tag>
       
@@ -107,13 +136,13 @@
     
     <tags>
       
-      <tag>C++</tag>
+      <tag>技术</tag>
       
       <tag>Developer</tag>
       
-      <tag>Programming</tag>
+      <tag>C++</tag>
       
-      <tag>技术</tag>
+      <tag>Programming</tag>
       
     </tags>
     
@@ -138,13 +167,13 @@
     
     <tags>
       
-      <tag>C++</tag>
+      <tag>技术</tag>
       
       <tag>Developer</tag>
       
-      <tag>Programming</tag>
+      <tag>C++</tag>
       
-      <tag>技术</tag>
+      <tag>Programming</tag>
       
     </tags>
     
@@ -157,7 +186,7 @@
     <link href="/post/c78e5236.html"/>
     <url>/post/c78e5236.html</url>
     
-    <content type="html"><![CDATA[<h1 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h1><p>两台相邻机器实现可靠通信（相邻是通过信道连接起来）</p><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul><li>向网络层提供服务接口</li><li>处理传输错误</li><li>调节数据流</li></ul><p>提供的服务：</p><ul><li>无确认的无连接服务（差错很少或者实时场景）</li><li>有确认的无连接（帧要确认是否收到，比如无线系统）</li><li>有确认的有连接</li></ul><h2 id="成帧"><a href="#成帧" class="headerlink" title="成帧"></a>成帧</h2><p>由于接收到的可能出错，因此需要校验，方便校验， 使用帧的概念。每一个帧都有令牌检验</p><h3 id="成帧方式"><a href="#成帧方式" class="headerlink" title="成帧方式"></a>成帧方式</h3><ul><li>字节计数</li><li>字节填充的标志字节（缺点：必须以该字节的大小（比如8比特）作为传输基本单元）</li><li>比特填充的标志比特（任意大小单元组成二进制流）</li></ul><p>后两者副作用：帧大小取决于帧的数据内容</p><h2 id="差错控制"><a href="#差错控制" class="headerlink" title="差错控制"></a>差错控制</h2><p>确保可靠，我们要有<strong>反馈</strong>信息。接收方返回控制帧，进行肯定或否定的确认。但可能会有<strong>帧丢失</strong>的情况，这样如何反应？需要引入<strong>计时器</strong>，但是计时器会造成这种问题：接收方接收到两个一样的帧，多次传给了网络层，所以又需要为<strong>帧分配序号</strong>，从而使接收方区分原始帧和重传帧。</p><h3 id="纠错码"><a href="#纠错码" class="headerlink" title="纠错码"></a>纠错码</h3><ul><li>码字，码率，海明距离</li></ul><p>为了检测d位错误，需要一个距离为d+1的编码方案，因为在这样的编码方案中，d位错误不可能将一个有效码字变成另一个有效码字。</p><p>为了纠正d位错误，需要距离为2d+1的编码方案，这样，合法码字足够远，即使发生了d位变化，也还是离原来的码字更近。<strong>在不太可能有更多错误的假设下，可以唯一确认原来的码字，从而纠错</strong>。</p><h3 id="检错码"><a href="#检错码" class="headerlink" title="检错码"></a>检错码</h3><p>纠错码被用于无线系统，而光纤铜线等更加可靠，因此使用差错检测和重传更高效。</p><ul><li>奇偶校验</li><li>校验和</li><li>CRC</li></ul><h2 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h2><p>基于反馈的流量控制</p><ul><li><p>物理层进程和某些数据链路层进程运行在一个称为NIC（网络接口卡）的硬件上，也就是网卡</p></li><li><p>网络层永远得不到任何帧头的信息，这是因为要保持网络层和数据链路层的完全分离。只要网络层对数据链路层和帧格式一无所知，那么当数据链路层协议改变时，网络层软件不用作出任何改变。（比如换了个网卡）</p></li><li><p>一个帧由4个字段组成：kind, seq, ack, info，前三个是控制信息，合称帧头</p></li></ul><h2 id="基本协议"><a href="#基本协议" class="headerlink" title="基本协议"></a>基本协议</h2><ul><li>乌托邦式的协议</li><li>无错，单工停等式协议——只是接受，接受到就可以发下一个</li><li>有错，单工停等式协议——计时器+序号（区分新帧老帧）</li><li>如果在一个协议中，发送方在前移到下一个数据之前必须等待一个肯定确认，这样的协议叫自动重复请求（ARQ），常用的ARQ有SAW（停等）、GBN（回退N）、SRP（选择重传）</li><li>滑动窗口协议（最大区别-双向的）同一个链路传输两个方向，<strong>并且使用捎带确认</strong>，增大利用率</li></ul><h3 id="SAW（停等）"><a href="#SAW（停等）" class="headerlink" title="SAW（停等）"></a>SAW（停等）</h3><ul><li>发送后等ACk</li><li>设置计时器</li><li>设置序号区分</li><li>为了标识ACK，使用捎带确认</li></ul><h3 id="一位窗口滑动协议"><a href="#一位窗口滑动协议" class="headerlink" title="一位窗口滑动协议"></a>一位窗口滑动协议</h3><h3 id="回退N协议"><a href="#回退N协议" class="headerlink" title="回退N协议"></a>回退N协议</h3><h4 id="简要操作"><a href="#简要操作" class="headerlink" title="简要操作"></a>简要操作</h4><ul><li>发送窗口：<ul><li>收缩：包发出去了</li><li>扩展：收到了包对应的ACK</li></ul></li><li>接收窗口：<ul><li>收缩：包收到了</li><li>扩展：发出了ACK</li></ul></li></ul><p>考虑到传输时延，使用管道化。</p><p>为了处理管道化的错误，两种协议，回退N和选择重传</p><p>回退N对应于窗口大小为1的情形，选择重传的窗口大小大于1</p><p>计时器过期时间 T &gt; W * L &#x2F; R（先把窗口的传出去）</p><p>发现错误后也有基于ACK的和NAK的两种方法</p><p>可能丢帧，也可能丢ACK（计时器触发）</p><p>在GBN下，不是每个帧都要独立ACK</p><h4 id="详细操作"><a href="#详细操作" class="headerlink" title="详细操作"></a>详细操作</h4><p>A - to - B，A有一个计时器</p><h5 id="帧损坏"><a href="#帧损坏" class="headerlink" title="帧损坏"></a>帧损坏</h5><ul><li>帧内部出错：B检测到frame i出错，B必须立刻传NAK i，当A收到NAK，必须重传帧i和后面的</li><li>帧i丢失：但是B收到帧i+1，此时B也认为出错，必须发送NAK i</li><li>帧i丢失，但是B没收到其他帧，B可能会发ACK i-1，可能发NAK i。但A的定时器最终失效肯定会保证。</li></ul><h5 id="ACK-丢失"><a href="#ACK-丢失" class="headerlink" title="ACK 丢失"></a>ACK 丢失</h5><ul><li>B收到帧i，发ACK i+1，但是丢失了，但是B可能发了个ACK i+2或者以后的，<strong>不出错</strong></li><li>B没发后面的ACK，A的定时器失效，重发</li></ul><h5 id="NAK-丢失"><a href="#NAK-丢失" class="headerlink" title="NAK 丢失"></a>NAK 丢失</h5><ul><li>A 将在关联的（稍后的）帧上超时，并重新传输帧 i 和所有后续帧。</li></ul><h5 id="Note："><a href="#Note：" class="headerlink" title="Note："></a>Note：</h5><p>不是每个帧都会被独立ACKed</p><h3 id="选择重传协议"><a href="#选择重传协议" class="headerlink" title="选择重传协议"></a>选择重传协议</h3><p>通常和否定策略结合，即发送否定确认。</p><p>每个帧都需要单独确认</p><p>效率：min（1，W*t&#x2F;S）,t是传输时延，S是一个的总时间</p><p>GBN和SRP效率都是这个</p><h2 id="数据链路总结"><a href="#数据链路总结" class="headerlink" title="数据链路总结"></a>数据链路总结</h2><p>提供无错的比特流</p><ul><li>成帧（三种方法）</li><li>差错控制<ul><li>编码（检错纠错）</li><li>海明码</li><li>奇偶</li><li>CRC</li></ul></li><li>ARQ差错恢复：重发<ul><li>发送者处理丢失的帧，接收者处理出错的帧</li><li>SAW思想</li><li>滑动窗口<ul><li>SAW</li><li>GBN</li><li>SPR</li></ul></li></ul></li></ul><h1 id="MAC"><a href="#MAC" class="headerlink" title="MAC"></a>MAC</h1><h2 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h2><p>分配channel：单一（固定）&amp; 随机（动态）</p><p>core: Who can transmit at when</p><h2 id="多人访问链接"><a href="#多人访问链接" class="headerlink" title="多人访问链接"></a>多人访问链接</h2><p>包含两部分：</p><p>点对点连接：终端和交换机（台式）<br>广播连接：以太网 ，无线连接</p><p>多人访问并非只有动态，也可能有p to p</p><h2 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h2><ul><li>ALOHA</li><li>CSMA</li><li>Taking turns</li><li>collision free</li><li>limited-contention</li><li>Ethernet</li><li>Wireless LAN</li></ul><p>要解决的核心：<strong>冲突检测、恢复</strong></p><h3 id="term"><a href="#term" class="headerlink" title="term"></a>term</h3><ul><li>frame  time：transmission delay</li><li>N : new frames</li><li>G : generated frames &#x2F; frame time(considering retransmission)</li></ul><h3 id="pure-ALOHA"><a href="#pure-ALOHA" class="headerlink" title="pure ALOHA"></a>pure ALOHA</h3><ul><li><p>检测：听</p></li><li><p>恢复：等随机时间再重发</p></li><li><p>Vulnerable time：2t（t 是 transmission delay）</p></li><li><p>max throughput : 0.184</p></li></ul><h3 id="Slotted-ALOHA"><a href="#Slotted-ALOHA" class="headerlink" title="Slotted ALOHA"></a>Slotted ALOHA</h3><ul><li>Time is cut into slots.</li><li>need sync</li><li>Vulnerable time : t</li><li>max throughput : 0.368</li></ul><p>ALOHO 的主要问题：吞吐量太低了</p><p>本着提高信道利用率，下面是CSMA</p><h3 id="CSMA"><a href="#CSMA" class="headerlink" title="CSMA"></a>CSMA</h3><p><strong>check before transmit</strong>（提高信道利用率）</p><ul><li>scenario : LAN (propagation delay is small)</li><li>p-Persistence CSMA &amp; Non-Persistence CSMA<ul><li>if persist, the node listen to the channel continuously, and transmit frame with probability of p.</li><li>if not persist, node doesn’t listen continuously, check channel after random time</li></ul></li><li>Collision may still happen because of propagation delay</li><li>p越小，其实吞吐量越大，倾向于conservative</li><li>主要是为了提高利用率，但冲突还是会发生，一旦发生，帧就要浪费</li></ul><p>为了减少不必要的浪费，<strong>添加冲突检测</strong>，检测到就直接停止</p><h3 id="CSMA-x2F-CD（Ethernet）"><a href="#CSMA-x2F-CD（Ethernet）" class="headerlink" title="CSMA&#x2F;CD（Ethernet）"></a>CSMA&#x2F;CD（Ethernet）</h3><p>如何检测？</p><ul><li>有线：听到的和发出的一样不</li><li>无线：难以检测<ul><li>硬件限制（只能取一）</li></ul></li></ul><h4 id="检测"><a href="#检测" class="headerlink" title="检测"></a>检测</h4><ul><li>contention</li><li>idle</li><li>transmission</li></ul><h4 id="检测时间"><a href="#检测时间" class="headerlink" title="检测时间"></a>检测时间</h4><ul><li><p>最小：t（prop）</p></li><li><p>最大：2t（RTT）</p></li></ul><p>CSMA&#x2F;CD &#x3D; slotted ALOHA with slot of length 2t</p><p>静态的适合高负载，动态的适合低负载</p><h3 id="Collision-Free-Protocol"><a href="#Collision-Free-Protocol" class="headerlink" title="Collision-Free Protocol"></a>Collision-Free Protocol</h3><ul><li>polling(轮询)</li><li>token ring</li><li>bit-map（适合人多）reserve</li><li>binary countdown（有优先级）reserve</li></ul><h3 id="Limited-Contention-Protocols"><a href="#Limited-Contention-Protocols" class="headerlink" title="Limited Contention Protocols"></a>Limited Contention Protocols</h3><p>低负载竞争（延迟小），高负载无冲突（利用率高）</p><p>做法：分组：组内竞争一个时间slot</p><p>关键在于动态分配时间槽</p><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="Ethernet"><a href="#Ethernet" class="headerlink" title="Ethernet"></a>Ethernet</h3><p>LAN</p><p><strong>Encapsulation</strong>: IP datagram -&gt; Ethernet frame</p><ul><li>frame structure：Preamble，Address(Dest &amp; Source)，Type（higher-layer）Data，CRC</li><li>many different Ethernet standards（a family）</li><li>不可靠、无连接</li></ul><h3 id="经典以太网"><a href="#经典以太网" class="headerlink" title="经典以太网"></a>经典以太网</h3><h4 id="帧结构"><a href="#帧结构" class="headerlink" title="帧结构"></a>帧结构</h4><ul><li><p>目标地址第一位：0是普通地址，1是组地址，该组中的所有站都要接受（组播），全1是广播</p></li><li><p>type：网络层可能有多个协议，因此需要知道谁来处理</p></li><li><p>Data：不能太大，太大了收发器没有足够的内存来存储完整帧；不能太小，太小了</p><ul><li>冲突后会截断，截断的更短，要能区分有效帧和截断的无效数据</li><li>（更重要原因）—— 传完了，但是冲突了。冲突时接收方发出突发噪声，让发送方知道冲突了。但如果帧太短，发送方已经传完了，那么它就知道自己已经传成功了，结论错误。</li></ul></li></ul><h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><ul><li>NIC收到网络层的数据，构建帧</li><li>监听信道96 bit time，如果空闲就传，否则等待</li><li>无冲突，传输成功</li><li>有冲突，放弃并且传48bit的jam signal（突发信号），等待随机时间</li></ul><p>随机时间如何确定？</p><h4 id="二进制指数后退"><a href="#二进制指数后退" class="headerlink" title="二进制指数后退"></a>二进制指数后退</h4><p>两个站冲突后等待，如果等待时间一样，那么会一直冲突</p><p>如果冲突了m次，那么下次就从0到2的m次方-1，这些数中随机选择。期望增加</p><p>最大1023，还冲突发失败报告</p><h4 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h4><p>帧越长，效率越高，但是那样变成只为一个人服务了</p><h3 id="集线器-hub-x2F-中继器"><a href="#集线器-hub-x2F-中继器" class="headerlink" title="集线器 hub &#x2F; 中继器"></a>集线器 hub &#x2F; 中继器</h3><ul><li><p>无脑传输，一个来，其余所有路线传出去</p></li><li><p>共同组成一个大的冲突域</p></li><li><p>主机需要使用CSMA&#x2F;CD</p></li></ul><h3 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h3><ul><li>有缓存 ：store and forward</li><li>传输有目标，只传到目标地址的主机</li><li>全双工，无冲突</li><li>自学习，交换表</li></ul><h3 id="无线网络LAN"><a href="#无线网络LAN" class="headerlink" title="无线网络ＬＡＮ"></a>无线网络ＬＡＮ</h3><p>基站 : 无线和有线之间的桥梁</p><h4 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h4><ul><li>衰减</li><li>干扰</li><li>多径效应(反射的存在)</li></ul><p>SNR很重要</p><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ul><li>隐藏终端问题 – 由于竞争者离得太远而导致站无法检测到潜在的竞争者</li><li>暴露终端问题 – 发送方由于离得近, 导致不敢发送(其实方向不一样可以发送)</li></ul><p>CSMA还是可以工作,但是无法检测冲突,只能避免冲突</p><h4 id="CSMA-x2F-CA"><a href="#CSMA-x2F-CA" class="headerlink" title="CSMA&#x2F;CA"></a>CSMA&#x2F;CA</h4><p>发送前要等一段时间(发送方和接收方都是)</p><p><strong>RTS - CTS</strong></p><ul><li><p>如果有基站: 发送者发RTS,听到的人知道附近有人在发东西, 先别发, 接收方返回CTS, 其他人听到CTS, 也等着(CTS里面有帧长度信息所以知道等多长时间)</p></li><li><p>没有基站, 有隐藏终端和暴露终端的问题. 与上面不同的一点, 如果一个站点听到了RTS, 但是没有听到CTS, 说明这个站点和接收方实际上很远, 可以发送</p></li></ul><p>真正希望知道的是接收方附近是否有无线电活动</p><hr><h1 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h1><p>数据链路就是将帧从一端传到另一端，而网络层是处理端到端数据传输的最底层。因此需要知道整个网络的拓扑结构，选择路径、选择路由</p><h2 id="提供服务"><a href="#提供服务" class="headerlink" title="提供服务"></a>提供服务</h2><ul><li>向传输层提供服务需要独立于路由器（数量种类与拓扑）</li><li>传输层需要的网络地址需要一个统一的编址方案</li><li>无连接和连接的争论</li></ul><p>面向连接，数据报——数据报网络</p><p>不面向连接，虚电路——虚电路网络</p><h2 id="路由算法"><a href="#路由算法" class="headerlink" title="路由算法"></a>路由算法</h2><p>是网络层软件的一部分，负责确定一个入境数据包应该发送到哪个输出线路上。</p><p>路由：对使用哪一条路径作出决策</p><p>转发：数据包到达后采取什么决策（查表）</p><p>路由算法：生成和更新路由表</p><h1 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h1><h2 id="为什么有传输层"><a href="#为什么有传输层" class="headerlink" title="为什么有传输层"></a>为什么有传输层</h2><p>为了定位一个路由，只需要下面三层，但是我们用户接触的是应用层，还需要一层，连接网络层与应用层。提供的是一种逻辑的连接，在不同主机的不同进程之间，对应用层掩盖网络层的一些细节。</p><p>当你位置变动，实际上网络层的细节都变了，路由方式也变了，甚至路由协议也变了。所以我们需要传输层，提供逻辑上的可靠连接抽象</p><ul><li>进程与进程之间的</li></ul><h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><ul><li>面向连接（TCP）<ul><li>建立连接</li><li>流量控制</li><li>拥塞控制</li></ul></li><li>不面向 – UDP</li><li>注意：网络层给了两种，面向连接（建立虚电路）与不面向（IP），但主流还是IP</li></ul><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>往往有4种方式，后两种常见</p><ul><li>网卡</li><li>应用层</li><li>操作系统内核</li><li>网络应用的库</li></ul><h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><ul><li>需要提供可靠、顺序的数据包<ul><li>数据链路层的有序，为什么网络层有无序？</li><li>原因：数据链路有序（GBN），但数据链路仅针对相邻主机的一个hop，是在以太网里运行的，但是出去了还是要靠IP，但是IP是不管的（每个packet独立转发），因此传输层需要再把顺序搞回来</li></ul></li><li>流量控制</li><li>拥塞控制</li><li>网络层主要运行在路由器上，由ISP拥有，但传输层主要是本机，由个人拥有</li></ul><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><ul><li>端口（src与dest）——端口就是传输层的address</li><li>Seq #（以bytes的多少计数，不是按照segments计数，每一个byte都被编号了）</li><li>Ack #（同上）</li><li>接受窗口</li><li>Flag<ul><li>ACK（上面的ACK是否有效）</li><li>RST（reset）</li><li>SYN（是否为syn包）</li><li>FIN（是否为fin包）</li></ul></li></ul><h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><p>IP + port</p><ul><li>UDP的端口号对应一个队列，但是TCP的端口号就是共享的</li></ul><h4 id="建立"><a href="#建立" class="headerlink" title="建立"></a>建立</h4><p>两次握手行不行？</p><p>一个请求，一个回应，同时事先约定我们都从0开始（因为总还是有同步需求）</p><p>不行，根源在于建立在IP上，每个包都是单独转发，路由可能需要复制包去泛洪，这样接收者会收到重复的0，会认为是一个新的连接。</p><p>建立连接，为了防止混淆，需要每次一个ISN（初始seq num），同时三次握手来保障。</p><p>必须要有个已读回执，也就是三次握手，不会收到重复的影响</p><ul><li>序列号要重复使用，其使用间隔必须大于2T，以便于上一轮的包与ACK都expire了</li><li>MSL —— 最长lifetime</li><li>每次连接都是新的初始序列号</li><li>建立后忽略重复建立请求</li></ul><h4 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h4><ul><li>sender发送SYN置1的包，此时seq为x</li><li>receiver返回SYN与ACK均置1的包，seq为y，同时ack为x+1</li><li>sender发送ACK的包，seq为x+1，ack为y+1</li><li>对应关系：收到的seq是什么，发出的ack就是什么+1（表示expect下一个）</li><li>收到的ack是什么，就发出什么seq（是他所需要的）</li></ul><p><strong>重复建立连接请求</strong></p><p>如果重复请求建立同一个连接（网络原因），接收者照常回复，由发送者在第三次时候来判断，直接发RST（reset）</p><p><strong>重复ACK</strong></p><p>还是由发送者判断，发送RST</p><p><strong>同时请求建立连接</strong></p><p>各自发SYN与（SYN+ACK），结束，不再有第三次ACK</p><h4 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h4><ul><li>sender发送FIN</li><li>receiver发送ACK，此时关闭单方向的（half-close）</li><li>receiver发送FIN，表示我也结束了</li><li>sender发送ACK，表示我知道了</li><li>即每个方向用两次握手</li><li>关闭时不需要三次，因为如果丢了，还有个过期的机制，无影响</li></ul><p><strong>同时关闭</strong></p><p>各自发送FIN，收到后再发送ACK，即关闭</p><p><strong>第四步的发送</strong></p><p>为什么在第二步已经关闭了单向的连接（比如关闭一个浏览器网页），但是第四步还是可以发送ACK？</p><p>原因：第二步关闭的是应用层，第四步是传输层处理</p><h4 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h4><p>双端都需要一个状态机，才能知道目前的状态，在等的状态，等到后发什么，变成什么</p><h3 id="TCP性质"><a href="#TCP性质" class="headerlink" title="TCP性质"></a>TCP性质</h3><ul><li>流量与拥塞控制</li><li>TCP Reno，newReno：GBN</li><li>TCP SACK：SRP</li></ul><p>ACK的确认仍然是累加的</p><p>不使用NAK，但是使用重复的ACK</p><h3 id="流量-x2F-拥塞控制"><a href="#流量-x2F-拥塞控制" class="headerlink" title="流量&#x2F;拥塞控制"></a>流量&#x2F;拥塞控制</h3><p>两个变量：</p><ul><li>rwnd : 接收方目前想要接受的速度，可以小于物理buffer</li><li>cwnd：拥塞控制的变量</li><li>有效的 &#x3D; min(rwnd, cwnd)</li></ul><p>拥塞控制的核心就在于调整cwnd</p><h4 id="慢启动"><a href="#慢启动" class="headerlink" title="慢启动"></a>慢启动</h4><ul><li>指数增长</li></ul><h4 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h4><ul><li>AIMD</li><li>线性增加</li><li>指数减少</li></ul><h4 id="检测-1"><a href="#检测-1" class="headerlink" title="检测"></a>检测</h4><p>这里进行了一次不对等条件的转换</p><p>很多包时，路由器丢掉最后的包，我们直接认为：丢包 &#x3D; 出现拥塞</p><p>然后变成了检测丢包的问题：</p><ul><li>重传时间超时（RTO）</li><li>重复ACK</li></ul><h4 id="超时"><a href="#超时" class="headerlink" title="超时"></a>超时</h4><p>RTO需要设置好，大于RTT（至少），也不能太长</p><p>动态调整RTO</p><p>先估计RTT：</p><p>发一个SampleRTT，然后收到ACK</p><p>然后对于SampleRTT进行平滑处理，这里方法是在时间上加窗口</p><p>current estimated &#x3D; old estimated * (1 - x) + x * sampleRTT</p><p>类似等比数列，越前面的影响越小</p><p>RTO &#x3D; estimated RTT  + 安全边距</p><p>边距就是SampleRTT的方差，同时也被应用了一个以时间为权重的窗口</p><h4 id="重复ACK"><a href="#重复ACK" class="headerlink" title="重复ACK"></a>重复ACK</h4><p>快重传（cont）</p><h4 id="慢启动细节"><a href="#慢启动细节" class="headerlink" title="慢启动细节"></a>慢启动细节</h4><p>收到一个ACK，就增大一个cwnd</p><ul><li>如果每个包都有ACK，那么整体增速就是2的n次方</li><li>每隔一个包确认一次，底数就是1.5</li><li>达到阈值后就进入拥塞控制阶段</li></ul><h4 id="快重传-amp-快恢复"><a href="#快重传-amp-快恢复" class="headerlink" title="快重传&amp;快恢复"></a>快重传&amp;快恢复</h4><p>如果有三个ACK，不至于超时那么严重，不会激进地把cwnd设置为1</p><p><strong>快重传</strong>：先把请求的发了，然后<code>cwnd = ssthresh + number of duplicated ACKs</code>（临时阶段）</p><p>然后从临时恢复过来，叫<strong>快恢复</strong>：</p><p>即收到新的ACK后，说明那个丢失的解决了，再设置<code>cwnd = ssthresh</code>，重新进入拥塞避免阶段</p><hr><h1 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h1><p>该封面图片由<a href="https://pixabay.com/zh/users/xiserge-15871962/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=7426887">xiSerge</a>在<a href="https://pixabay.com/zh//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=7426887">Pixabay</a>上发布</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h1><p>两台相邻机器实现可靠通信（相邻是通过信道连接起来）</p><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul><li>向网络层提供服务接口</li><li>处理传输错误</li><li>调节数据流</li></ul><p>提供的服务：</p><ul><li>无确认的无连接服务（差错很少或者实时场景）</li><li>有确认的无连接（帧要确认是否收到，比如无线系统）</li><li>有确认的有连接</li></ul><h2 id="成帧"><a href="#成帧" class="headerlink" title="成帧"></a>成帧</h2><p>由于接收到的可能出错，因此需要校验，方便校验， 使用帧的概念。每一个帧都有令牌检验</p><h3 id="成帧方式"><a href="#成帧方式" class="headerlink" title="成帧方式"></a>成帧方式</h3><ul><li>字节计数</li><li>字节填充的标志字节（缺点：必须以该字节的大小（比如8比特）作为传输基本单元）</li><li>比特填充的标志比特（任意大小单元组成二进制流）</li></ul><p>后两者副作用：帧大小取决于帧的数据内容</p><h2 id="差错控制"><a href="#差错控制" class="headerlink" title="差错控制"></a>差错控制</h2><p>确保可靠，我们要有<strong>反馈</strong>信息。接收方返回控制帧，进行肯定或否定的确认。但可能会有<strong>帧丢失</strong>的情况，这样如何反应？需要引入<strong>计时器</strong>，但是计时器会造成这种问题：接收方接收到两个一样的帧，多次传给了网络层，所以又需要为<strong>帧分配序号</strong>，从而使接收方区分原始帧和重传帧。</p><h3 id="纠错码"><a href="#纠错码" class="headerlink" title="纠错码"></a>纠错码</h3><ul><li>码字，码率，海明距离</li></ul><p>为了检测d位错误，需要一个距离为d+1的编码方案，因为在这样的编码方案中，d位错误不可能将一个有效码字变成另一个有效码字。</p><p>为了纠正d位错误，需要距离为2d+1的编码方案，这样，合法码字足够远，即使发生了d位变化，也还是离原来的码字更近。<strong>在不太可能有更多错误的假设下，可以唯一确认原来的码字，从而纠错</strong>。</p><h3 id="检错码"><a href="#检错码" class="headerlink" title="检错码"></a>检错码</h3><p>纠错码被用于无线系统，而光纤铜线等更加可靠，因此使用差错检测和重传更高效。</p><ul><li>奇偶校验</li><li>校验和</li><li>CRC</li></ul><h2 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h2><p>基于反馈的流量控制</p><ul><li><p>物理层进程和某些数据链路层进程运行在一个称为NIC（网络接口卡）的硬件上，也就是网卡</p></li><li><p>网络层永远得不到任何帧头的信息，这是因为要保持网络层和数据链路层的完全分离。只要网络层对数据链路层和帧格式一无所知，那么当数据链路层协议改变时，网络层软件不用作出任何改变。（比如换了个网卡）</p></li><li><p>一个帧由4个字段组成：kind, seq, ack, info，前三个是控制信息，合称帧头</p></li></ul><h2 id="基本协议"><a href="#基本协议" class="headerlink" title="基本协议"></a>基本协议</h2><ul><li>乌托邦式的协议</li><li>无错，单工停等式协议——只是接受，接受到就可以发下一个</li><li>有错，单工停等式协议——计时器+序号（区分新帧老帧）</li><li>如果在一个协议中，发送方在前移到下一个数据之前必须等待一个肯定确认，这样的协议叫自动重复请求（ARQ），常用的ARQ有SAW（停等）、GBN（回退N）、SRP（选择重传）</li><li>滑动窗口协议（最大区别-双向的）同一个链路传输两个方向，<strong>并且使用捎带确认</strong>，增大利用率</li></ul><h3 id="SAW（停等）"><a href="#SAW（停等）" class="headerlink" title="SAW（停等）"></a>SAW（停等）</h3><ul><li>发送后等ACk</li><li>设置计时器</li><li>设置序号区分</li><li>为了标识ACK，使用捎带确认</li></ul><h3 id="一位窗口滑动协议"><a href="#一位窗口滑动协议" class="headerlink" title="一位窗口滑动协议"></a>一位窗口滑动协议</h3><h3 id="回退N协议"><a href="#回退N协议" class="headerlink" title="回退N协议"></a>回退N协议</h3><h4 id="简要操作"><a href="#简要操作" class="headerlink" title="简要操作"></a>简要操作</h4><ul><li>发送窗口：<ul><li>收缩：包发出去了</li><li>扩展：收到了包对应的ACK</li></ul></li><li>接收窗口：<ul><li>收缩：包收到了</li><li>扩展：发出了ACK</li></ul></li></ul><p>考虑到传输时延，使用管道化。</p><p>为了处理管道化的错误，两种协议，回退N和选择重传</p><p>回退N对应于窗口大小为1的情形，选择重传的窗口大小大于1</p><p>计时器过期时间 T &gt; W * L &#x2F; R（先把窗口的传出去）</p><p>发现错误后也有基于ACK的和NAK的两种方法</p><p>可能丢帧，也可能丢ACK（计时器触发）</p><p>在GBN下，不是每个帧都要独立ACK</p><h4 id="详细操作"><a href="#详细操作" class="headerlink" title="详细操作"></a>详细操作</h4><p>A - to - B，A有一个计时器</p><h5 id="帧损坏"><a href="#帧损坏" class="headerlink" title="帧损坏"></a>帧损坏</h5><ul><li>帧内部出错：B检测到frame i出错，B必须立刻传NAK i，当A收到NAK，必须重传帧i和后面的</li><li>帧i丢失：但是B收到帧i+1，此时B也认为出错，必须发送NAK i</li><li>帧i丢失，但是B没收到其他帧，B可能会发ACK i-1，可能发NAK i。但A的定时器最终失效肯定会保证。</li></ul><h5 id="ACK-丢失"><a href="#ACK-丢失" class="headerlink" title="ACK 丢失"></a>ACK 丢失</h5><ul><li>B收到帧i，发ACK i+1，但是丢失了，但是B可能发了个ACK i+2或者以后的，<strong>不出错</strong></li><li>B没发后面的ACK，A的定时器失效，重发</li></ul><h5 id="NAK-丢失"><a href="#NAK-丢失" class="headerlink" title="NAK 丢失"></a>NAK 丢失</h5><ul><li>A 将在关联的（稍后的）帧上超时，并重新传输帧 i 和所有后续帧。</li></ul><h5 id="Note："><a href="#Note：" class="headerlink" title="Note："></a>Note：</h5><p>不是每个帧都会被独立ACKed</p><h3 id="选择重传协议"><a href="#选择重传协议" class="headerlink" title="选择重传协议"></a>选择重传协议</h3><p>通常和否定策略结合，即发送否定确认。</p><p>每个帧都需要单独确认</p><p>效率：min（1，W*t&#x2F;S）,t是传输时延，S是一个的总时间</p><p>GBN和SRP效率都是这个</p><h2 id="数据链路总结"><a href="#数据链路总结" class="headerlink" title="数据链路总结"></a>数据链路总结</h2><p>提供无错的比特流</p><ul><li>成帧（三种方法）</li><li>差错控制<ul><li>编码（检错纠错）</li><li>海明码</li><li>奇偶</li><li>CRC</li></ul></li><li>ARQ差错恢复：重发<ul><li>发送者处理丢失的帧，接收者处理出错的帧</li><li>SAW思想</li><li>滑动窗口<ul><li>SAW</li><li>GBN</li><li>SPR</li></ul></li></ul></li></ul><h1 id="MAC"><a href="#MAC" class="headerlink" title="MAC"></a>MAC</h1><h2 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h2><p>分配channel：单一（固定）&amp; 随机（动态）</p><p>core: Who can transmit at when</p><h2 id="多人访问链接"><a href="#多人访问链接" class="headerlink" title="多人访问链接"></a>多人访问链接</h2><p>包含两部分：</p><p>点对点连接：终端和交换机（台式）<br>广播连接：以太网 ，无线连接</p><p>多人访问并非只有动态，也可能有p to p</p><h2 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h2><ul><li>ALOHA</li><li>CSMA</li><li>Taking turns</li><li>collision free</li><li>limited-contention</li><li>Ethernet</li><li>Wireless LAN</li></ul><p>要解决的核心：<strong>冲突检测、恢复</strong></p><h3 id="term"><a href="#term" class="headerlink" title="term"></a>term</h3><ul><li>frame  time：transmission delay</li><li>N : new frames</li><li>G : generated frames &#x2F; frame time(considering retransmission)</li></ul><h3 id="pure-ALOHA"><a href="#pure-ALOHA" class="headerlink" title="pure ALOHA"></a>pure ALOHA</h3><ul><li><p>检测：听</p></li><li><p>恢复：等随机时间再重发</p></li><li><p>Vulnerable time：2t（t 是 transmission delay）</p></li><li><p>max throughput : 0.184</p></li></ul><h3 id="Slotted-ALOHA"><a href="#Slotted-ALOHA" class="headerlink" title="Slotted ALOHA"></a>Slotted ALOHA</h3><ul><li>Time is cut into slots.</li><li>need sync</li><li>Vulnerable time : t</li><li>max throughput : 0.368</li></ul><p>ALOHO 的主要问题：吞吐量太低了</p><p>本着提高信道利用率，下面是CSMA</p><h3 id="CSMA"><a href="#CSMA" class="headerlink" title="CSMA"></a>CSMA</h3><p><strong>check before transmit</strong>（提高信道利用率）</p><ul><li>scenario : LAN (propagation delay is small)</li><li>p-Persistence CSMA &amp; Non-Persistence CSMA<ul><li>if persist, the node listen to the channel continuously, and transmit frame with probability of p.</li><li>if not persist, node doesn’t listen continuously, check channel after random time</li></ul></li><li>Collision may still happen because of propagation delay</li><li>p越小，其实吞吐量越大，倾向于conservative</li><li>主要是为了提高利用率，但冲突还是会发生，一旦发生，帧就要浪费</li></ul><p>为了减少不必要的浪费，<strong>添加冲突检测</strong>，检测到就直接停止</p><h3 id="CSMA-x2F-CD（Ethernet）"><a href="#CSMA-x2F-CD（Ethernet）" class="headerlink" title="CSMA&#x2F;CD（Ethernet）"></a>CSMA&#x2F;CD（Ethernet）</h3><p>如何检测？</p><ul><li>有线：听到的和发出的一样不</li><li>无线：难以检测<ul><li>硬件限制（只能取一）</li></ul></li></ul><h4 id="检测"><a href="#检测" class="headerlink" title="检测"></a>检测</h4><ul><li>contention</li><li>idle</li><li>transmission</li></ul><h4 id="检测时间"><a href="#检测时间" class="headerlink" title="检测时间"></a>检测时间</h4><ul><li><p>最小：t（prop）</p></li><li><p>最大：2t（RTT）</p></li></ul><p>CSMA&#x2F;CD &#x3D; slotted ALOHA with slot of length 2t</p><p>静态的适合高负载，动态的适合低负载</p><h3 id="Collision-Free-Protocol"><a href="#Collision-Free-Protocol" class="headerlink" title="Collision-Free Protocol"></a>Collision-Free Protocol</h3><ul><li>polling(轮询)</li><li>token ring</li><li>bit-map（适合人多）reserve</li><li>binary countdown（有优先级）reserve</li></ul><h3 id="Limited-Contention-Protocols"><a href="#Limited-Contention-Protocols" class="headerlink" title="Limited Contention Protocols"></a>Limited Contention Protocols</h3><p>低负载竞争（延迟小），高负载无冲突（利用率高）</p><p>做法：分组：组内竞争一个时间slot</p><p>关键在于动态分配时间槽</p><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="Ethernet"><a href="#Ethernet" class="headerlink" title="Ethernet"></a>Ethernet</h3><p>LAN</p><p><strong>Encapsulation</strong>: IP datagram -&gt; Ethernet frame</p><ul><li>frame structure：Preamble，Address(Dest &amp; Source)，Type（higher-layer）Data，CRC</li><li>many different Ethernet standards（a family）</li><li>不可靠、无连接</li></ul><h3 id="经典以太网"><a href="#经典以太网" class="headerlink" title="经典以太网"></a>经典以太网</h3><h4 id="帧结构"><a href="#帧结构" class="headerlink" title="帧结构"></a>帧结构</h4><ul><li><p>目标地址第一位：0是普通地址，1是组地址，该组中的所有站都要接受（组播），全1是广播</p></li><li><p>type：网络层可能有多个协议，因此需要知道谁来处理</p></li><li><p>Data：不能太大，太大了收发器没有足够的内存来存储完整帧；不能太小，太小了</p><ul><li>冲突后会截断，截断的更短，要能区分有效帧和截断的无效数据</li><li>（更重要原因）—— 传完了，但是冲突了。冲突时接收方发出突发噪声，让发送方知道冲突了。但如果帧太短，发送方已经传完了，那么它就知道自己已经传成功了，结论错误。</li></ul></li></ul><h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><ul><li>NIC收到网络层的数据，构建帧</li><li>监听信道96 bit time，如果空闲就传，否则等待</li><li>无冲突，传输成功</li><li>有冲突，放弃并且传48bit的jam signal（突发信号），等待随机时间</li></ul><p>随机时间如何确定？</p><h4 id="二进制指数后退"><a href="#二进制指数后退" class="headerlink" title="二进制指数后退"></a>二进制指数后退</h4><p>两个站冲突后等待，如果等待时间一样，那么会一直冲突</p><p>如果冲突了m次，那么下次就从0到2的m次方-1，这些数中随机选择。期望增加</p><p>最大1023，还冲突发失败报告</p><h4 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h4><p>帧越长，效率越高，但是那样变成只为一个人服务了</p><h3 id="集线器-hub-x2F-中继器"><a href="#集线器-hub-x2F-中继器" class="headerlink" title="集线器 hub &#x2F; 中继器"></a>集线器 hub &#x2F; 中继器</h3><ul><li><p>无脑传输，一个来，其余所有路线传出去</p></li><li><p>共同组成一个大的冲突域</p></li><li><p>主机需要使用CSMA&#x2F;CD</p></li></ul><h3 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h3><ul><li>有缓存 ：store and forward</li><li>传输有目标，只传到目标地址的主机</li><li>全双工，无冲突</li><li>自学习，交换表</li></ul><h3 id="无线网络LAN"><a href="#无线网络LAN" class="headerlink" title="无线网络ＬＡＮ"></a>无线网络ＬＡＮ</h3><p>基站 : 无线和有线之间的桥梁</p><h4 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h4><ul><li>衰减</li><li>干扰</li><li>多径效应(反射的存在)</li></ul><p>SNR很重要</p><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ul><li>隐藏终端问题 – 由于竞争者离得太远而导致站无法检测到潜在的竞争者</li><li>暴露终端问题 – 发送方由于离得近, 导致不敢发送(其实方向不一样可以发送)</li></ul><p>CSMA还是可以工作,但是无法检测冲突,只能避免冲突</p><h4 id="CSMA-x2F-CA"><a href="#CSMA-x2F-CA" class="headerlink" title="CSMA&#x2F;CA"></a>CSMA&#x2F;CA</h4><p>发送前要等一段时间(发送方和接收方都是)</p><p><strong>RTS - CTS</strong></p><ul><li><p>如果有基站: 发送者发RTS,听到的人知道附近有人在发东西, 先别发, 接收方返回CTS, 其他人听到CTS, 也等着(CTS里面有帧长度信息所以知道等多长时间)</p></li><li><p>没有基站, 有隐藏终端和暴露终端的问题. 与上面不同的一点, 如果一个站点听到了RTS, 但是没有听到CTS, 说明这个站点和接收方实际上很远, 可以发送</p></li></ul><p>真正希望知道的是接收方附近是否有无线电活动</p><hr><h1 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h1><p>数据链路就是将帧从一端传到另一端，而网络层是处理端到端数据传输的最底层。因此需要知道整个网络的拓扑结构，选择路径、选择路由</p><h2 id="提供服务"><a href="#提供服务" class="headerlink" title="提供服务"></a>提供服务</h2><ul><li>向传输层提供服务需要独立于路由器（数量种类与拓扑）</li><li>传输层需要的网络地址需要一个统一的编址方案</li><li>无连接和连接的争论</li></ul><p>面向连接，数据报——数据报网络</p><p>不面向连接，虚电路——虚电路网络</p><h2 id="路由算法"><a href="#路由算法" class="headerlink" title="路由算法"></a>路由算法</h2><p>是网络层软件的一部分，负责确定一个入境数据包应该发送到哪个输出线路上。</p><p>路由：对使用哪一条路径作出决策</p><p>转发：数据包到达后采取什么决策（查表）</p><p>路由算法：生成和更新路由表</p><h1 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h1><h2 id="为什么有传输层"><a href="#为什么有传输层" class="headerlink" title="为什么有传输层"></a>为什么有传输层</h2><p>为了定位一个路由，只需要下面三层，但是我们用户接触的是应用层，还需要一层，连接网络层与应用层。提供的是一种逻辑的连接，在不同主机的不同进程之间，对应用层掩盖网络层的一些细节。</p><p>当你位置变动，实际上网络层的细节都变了，路由方式也变了，甚至路由协议也变了。所以我们需要传输层，提供逻辑上的可靠连接抽象</p><ul><li>进程与进程之间的</li></ul><h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><ul><li>面向连接（TCP）<ul><li>建立连接</li><li>流量控制</li><li>拥塞控制</li></ul></li><li>不面向 – UDP</li><li>注意：网络层给了两种，面向连接（建立虚电路）与不面向（IP），但主流还是IP</li></ul><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>往往有4种方式，后两种常见</p><ul><li>网卡</li><li>应用层</li><li>操作系统内核</li><li>网络应用的库</li></ul><h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><ul><li>需要提供可靠、顺序的数据包<ul><li>数据链路层的有序，为什么网络层有无序？</li><li>原因：数据链路有序（GBN），但数据链路仅针对相邻主机的一个hop，是在以太网里运行的，但是出去了还是要靠IP，但是IP是不管的（每个packet独立转发），因此传输层需要再把顺序搞回来</li></ul></li><li>流量控制</li><li>拥塞控制</li><li>网络层主要运行在路由器上，由ISP拥有，但传输层主要是本机，由个人拥有</li></ul><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><ul><li>端口（src与dest）——端口就是传输层的address</li><li>Seq #（以bytes的多少计数，不是按照segments计数，每一个byte都被编号了）</li><li>Ack #（同上）</li><li>接受窗口</li><li>Flag<ul><li>ACK（上面的ACK是否有效）</li><li>RST（reset）</li><li>SYN（是否为syn包）</li><li>FIN（是否为fin包）</li></ul></li></ul><h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><p>IP + port</p><ul><li>UDP的端口号对应一个队列，但是TCP的端口号就是共享的</li></ul><h4 id="建立"><a href="#建立" class="headerlink" title="建立"></a>建立</h4><p>两次握手行不行？</p><p>一个请求，一个回应，同时事先约定我们都从0开始（因为总还是有同步需求）</p><p>不行，根源在于建立在IP上，每个包都是单独转发，路由可能需要复制包去泛洪，这样接收者会收到重复的0，会认为是一个新的连接。</p><p>建立连接，为了防止混淆，需要每次一个ISN（初始seq num），同时三次握手来保障。</p><p>必须要有个已读回执，也就是三次握手，不会收到重复的影响</p><ul><li>序列号要重复使用，其使用间隔必须大于2T，以便于上一轮的包与ACK都expire了</li><li>MSL —— 最长lifetime</li><li>每次连接都是新的初始序列号</li><li>建立后忽略重复建立请求</li></ul><h4 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h4><ul><li>sender发送SYN置1的包，此时seq为x</li><li>receiver返回SYN与ACK均置1的包，seq为y，同时ack为x+1</li><li>sender发送ACK的包，seq为x+1，ack为y+1</li><li>对应关系：收到的seq是什么，发出的ack就是什么+1（表示expect下一个）</li><li>收到的ack是什么，就发出什么seq（是他所需要的）</li></ul><p><strong>重复建立连接请求</strong></p><p>如果重复请求建立同一个连接（网络原因），接收者照常回复，由发送者在第三次时候来判断，直接发RST（reset）</p><p><strong>重复ACK</strong></p><p>还是由发送者判断，发送RST</p><p><strong>同时请求建立连接</strong></p><p>各自发SYN与（SYN+ACK），结束，不再有第三次ACK</p><h4 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h4><ul><li>sender发送FIN</li><li>receiver发送ACK，此时关闭单方向的（half-close）</li><li>receiver发送FIN，表示我也结束了</li><li>sender发送ACK，表示我知道了</li><li>即每个方向用两次握手</li><li>关闭时不需要三次，因为如果丢了，还有个过期的机制，无影响</li></ul><p><strong>同时关闭</strong></p><p>各自发送FIN，收到后再发送ACK，即关闭</p><p><strong>第四步的发送</strong></p><p>为什么在第二步已经关闭了单向的连接（比如关闭一个浏览器网页），但是第四步还是可以发送ACK？</p><p>原因：第二步关闭的是应用层，第四步是传输层处理</p><h4 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h4><p>双端都需要一个状态机，才能知道目前的状态，在等的状态，等到后发什么，变成什么</p><h3 id="TCP性质"><a href="#TCP性质" class="headerlink" title="TCP性质"></a>TCP性质</h3><ul><li>流量与拥塞控制</li><li>TCP Reno，newReno：GBN</li><li>TCP SACK：SRP</li></ul><p>ACK的确认仍然是累加的</p><p>不使用NAK，但是使用重复的ACK</p><h3 id="流量-x2F-拥塞控制"><a href="#流量-x2F-拥塞控制" class="headerlink" title="流量&#x2F;拥塞控制"></a>流量&#x2F;拥塞控制</h3><p>两个变量：</p><ul><li>rwnd : 接收方目前想要接受的速度，可以小于物理buffer</li><li>cwnd：拥塞控制的变量</li><li>有效的 &#x3D; min(rwnd, cwnd)</li></ul><p>拥塞控制的核心就在于调整cwnd</p><h4 id="慢启动"><a href="#慢启动" class="headerlink" title="慢启动"></a>慢启动</h4><ul><li>指数增长</li></ul><h4 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h4><ul><li>AIMD</li><li>线性增加</li><li>指数减少</li></ul><h4 id="检测-1"><a href="#检测-1" class="headerlink" title="检测"></a>检测</h4><p>这里进行了一次不对等条件的转换</p><p>很多包时，路由器丢掉最后的包，我们直接认为：丢包 &#x3D; 出现拥塞</p><p>然后变成了检测丢包的问题：</p><ul><li>重传时间超时（RTO）</li><li>重复ACK</li></ul><h4 id="超时"><a href="#超时" class="headerlink" title="超时"></a>超时</h4><p>RTO需要设置好，大于RTT（至少），也不能太长</p><p>动态调整RTO</p><p>先估计RTT：</p><p>发一个SampleRTT，然后收到ACK</p><p>然后对于SampleRTT进行平滑处理，这里方法是在时间上加窗口</p><p>current estimated &#x3D; old estimated * (1 - x) + x * sampleRTT</p><p>类似等比数列，越前面的影响越小</p><p>RTO &#x3D; estimated RTT  + 安全边距</p><p>边距就是SampleRTT的方差，同时也被应用了一个以时间为权重的窗口</p><h4 id="重复ACK"><a href="#重复ACK" class="headerlink" title="重复ACK"></a>重复ACK</h4><p>快重传（cont）</p><h4 id="慢启动细节"><a href="#慢启动细节" class="headerlink" title="慢启动细节"></a>慢启动细节</h4><p>收到一个ACK，就增大一个cwnd</p><ul><li>如果每个包都有ACK，那么整体增速就是2的n次方</li><li>每隔一个包确认一次，底数就是1.5</li><li>达到阈值后就进入拥塞控制阶段</li></ul><h4 id="拥塞避免-1"><a href="#拥塞避免-1" class="headerlink" title="拥塞避免"></a>拥塞避免</h4><ul><li>每收到一个ACK，就增大<code>1/cwnd</code>，因此是线性增长</li></ul><h4 id="TCP-Tahoe"><a href="#TCP-Tahoe" class="headerlink" title="TCP Tahoe"></a>TCP Tahoe</h4><p>收到三个连续ACK或者超时</p><ul><li><code>ssthresh = cwnd / 2</code></li><li><code>cwnd = 1</code></li></ul><h4 id="TCP-Reno"><a href="#TCP-Reno" class="headerlink" title="TCP Reno"></a>TCP Reno</h4><p>超时后与Tahoe一样，但是当收到三个连续ACK后</p><ul><li><code>cwnd = cwnd / 2</code></li><li>继续在拥塞避免阶段</li></ul><h4 id="快重传-amp-快恢复"><a href="#快重传-amp-快恢复" class="headerlink" title="快重传&amp;快恢复"></a>快重传&amp;快恢复</h4><p>如果有三个ACK，不至于超时那么严重，不会激进地把cwnd设置为1</p><p><strong>快重传</strong>：先把请求的发了，然后<code>cwnd = ssthresh + number of duplicated ACKs</code>（临时阶段）</p><p>然后从临时恢复过来，叫<strong>快恢复</strong>：</p><p>即收到新的ACK后，说明那个丢失的解决了，再设置<code>cwnd = ssthresh</code>，重新进入拥塞避免阶段</p><p>握手阶段建立的ssthresh</p><h2 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h2><h3 id="公平性"><a href="#公平性" class="headerlink" title="公平性"></a>公平性</h3><p>理想是平分带宽</p><p>如果大家都遵守TCP的AIMD，那么会不断震荡到平衡最佳位置</p><p>但有的应用程序如果不遵守AIMD，那么会一直抢带宽（也比较难）</p><p>但是一般情况下许多应用程序可以通过并行化的方式，开启多个TCP连接，比如浏览器，这样协议是允许的</p><p>为了防止这种流氓行为，有的应用使用UDP协议（一些多媒体协议）</p><hr><h1 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h1><p>该封面图片由<a href="https://pixabay.com/zh/users/xiserge-15871962/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=7426887">xiSerge</a>在<a href="https://pixabay.com/zh//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=7426887">Pixabay</a>上发布</p>]]></content>
     
     
     <categories>
@@ -196,11 +225,11 @@
     
     <tags>
       
+      <tag>技术</tag>
+      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
-      
-      <tag>技术</tag>
       
       <tag>算法</tag>
       
@@ -227,9 +256,9 @@
     
     <tags>
       
-      <tag>Developer</tag>
-      
       <tag>技术</tag>
+      
+      <tag>Developer</tag>
       
       <tag>Java</tag>
       
@@ -256,11 +285,11 @@
     
     <tags>
       
-      <tag>C++</tag>
+      <tag>技术</tag>
       
       <tag>Developer</tag>
       
-      <tag>技术</tag>
+      <tag>C++</tag>
       
       <tag>Java</tag>
       
@@ -374,11 +403,11 @@
     
     <tags>
       
+      <tag>技术</tag>
+      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
-      
-      <tag>技术</tag>
       
       <tag>算法</tag>
       
@@ -407,11 +436,11 @@
     
     <tags>
       
+      <tag>技术</tag>
+      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
-      
-      <tag>技术</tag>
       
       <tag>算法</tag>
       
@@ -440,8 +469,6 @@
     
     <tags>
       
-      <tag>Developer</tag>
-      
       <tag>技术</tag>
       
       <tag>mysql</tag>
@@ -449,6 +476,8 @@
       <tag>数据库</tag>
       
       <tag>navicat</tag>
+      
+      <tag>Developer</tag>
       
     </tags>
     
@@ -531,13 +560,13 @@
     
     <tags>
       
-      <tag>C++</tag>
+      <tag>技术</tag>
       
       <tag>Developer</tag>
       
-      <tag>Programming</tag>
+      <tag>C++</tag>
       
-      <tag>技术</tag>
+      <tag>Programming</tag>
       
       <tag>C#</tag>
       
