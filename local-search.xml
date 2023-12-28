@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>大学教育的CICD</title>
+    <link href="/post/8d71a75.html"/>
+    <url>/post/8d71a75.html</url>
+    
+    <content type="html"><![CDATA[<h2 id="论点：大学教育是一场大型的CICD"><a href="#论点：大学教育是一场大型的CICD" class="headerlink" title="论点：大学教育是一场大型的CICD"></a>论点：大学教育是一场大型的CICD</h2><p>随着教育产业的高度成熟化，大学生活似乎变成了一条预定的道路，从大一入学开始，我们就仿佛踏上了一个精心设计的流水线。这个CICD<em>（Continuous Integration &amp; Continuous Deployment）</em>的比喻或许能够准确地描述现代大学的经历。为何高等教育演变成了这样的pipeline流水线呢？</p><h2 id="理想教育"><a href="#理想教育" class="headerlink" title="理想教育"></a>理想教育</h2><p>教育是一个很宏大的概念，<strong>感性来说</strong>，我认为教育应该回答&#x2F;引导几个问题：人为什么是人，你可以成为什么人，你想成为什么人。</p><blockquote><p>中国人缺少的三种教育：性的教育，爱的教育，死亡的教育。</p><p>这三种概念，分别对应着人生的三个支点：身体完整、灵魂丰沛、生命价值。</p><p>——本段话来源于网络</p></blockquote><p><strong>理性来说</strong>，我所讨论的教育可以分为两种：专科教育和高等教育</p><p><strong>1. 专科教育（一技之长）:</strong> 专科教育旨在培养学生特定领域的专业技能，使其能够在特定领域内成为专业人才。</p><p><strong>2. 高等教育（综合性技术）:</strong> 高等教育更注重培养学生的综合性能力，包括批判性思维、团队协作、创新等方面。这有助于适应多变的社会环境，不是某种领域的人才，而是可以成为多种领域的人才。</p><h2 id="现实教育"><a href="#现实教育" class="headerlink" title="现实教育"></a>现实教育</h2><blockquote><p>爱撒野的小孩，被教得很乖。——杨千嬅 歌曲《最好的债》（笔者有断章取义之嫌）</p><p>现代教育对孩子是残忍的，我们逼迫他们为了虚无缥缈的以后而牺牲近在眼前的需求，用各种限制加重孩子的负担，让他受苦，为了永远享受不到的遥远幸福做准备。 —— 卢梭</p></blockquote><p>然而，现实教育与理想相去甚远。一步步的偏差，使得大学生踏上了CICD的道路。</p><h3 id="现实教育的CICD过程"><a href="#现实教育的CICD过程" class="headerlink" title="现实教育的CICD过程"></a>现实教育的CICD过程</h3><ol><li><strong>初高中阶段</strong>：小镇做题家，被试卷 &amp; 考试充填。主要由关键的初一，关键的初二，关键的初三，关键的高一，关键的高二，关键的高三组成。</li><li><strong>入学阶段</strong>：通过高考进入大学，成为流水线的初始阶段。一群freshman对于未来充满憧憬和希望。</li><li><strong>专业学习</strong>：在经历了九年寒窗之后，学生们第一次如此真切地感受到属于自己的时间。同时，也开始接触各种学长总结提炼出来的文档 &amp; 经验 &amp; 道路，即使不懂，可是却被告知，那是大多数人走过的路，不会错的。从此，几条鲜明的道路展现在每一个学生面前：<ol><li>家里有矿，继承家产，不在此文讨论中</li><li>之后打算工作 &#x2F; 考研。此时平时成绩就无所谓了，于是可以平时<strong>持续性摆烂</strong>，只需要按部就班去签到，上着可听可不听的课程，和同学们合作完成一点作业；期末<strong>间歇性冲刺</strong>，及格便万事大吉。此时大多数时间主要被娱乐工具充填，比如短视频 &#x2F; 小说 &#x2F; 游戏等。</li><li>之后打算保研 &#x2F; 出国。此时平时成绩成为关键一环，每次出勤&#x2F;回答问题&#x2F;pre展示<strong>毕恭毕敬</strong>，期末的作业也要卷出水平，卷出高度，卷出风采，卷得让老师不好意思不给你优。参加比赛，参加活动，丰富履历，拿奖学金，最终成为公众号里“神仙宿舍”，“全体保研”文章的主人公。</li><li>当然也有一些其他情况，比如医学生，其本身的高强度课程安排，导致单纯是课程本身就已经占用了很多时间，加上本身5+3培养，导致与上面的情况不完全一样。</li></ol></li><li><strong>(Optional) 实习阶段</strong>：部分学校可能会要求实习，学生们第一次走出校外，到企业中工作，学习新知识，以及嫌弃自己课内什么有用的都没学到。</li><li><strong>秋招 &#x2F; 考研 &#x2F; 出国</strong>：到了大三下&#x2F;大四上，本科阶段逐渐步入尾声，学生们开始寻找出路。工作的人士要开始秋招，考研的人士开始泡图书馆，出国的人士也在考语言，准备材料。大家都开始忙碌起来。</li><li><strong>找到工作 &#x2F; 保研 &#x2F; 上岸</strong> ：大学生活的高潮是找到一份理想的工作，或者选择读研，将找工作这个问题留给三年后更加有智慧的自己。至此本科开始告一段落。</li></ol><h3 id="成为CICD的原因"><a href="#成为CICD的原因" class="headerlink" title="成为CICD的原因:"></a>成为CICD的原因:</h3><p>让我们先做几个假设：</p><ul><li>人需要必需品（衣食住行 + 看病），所以<strong>需要工作</strong></li><li>人需要消费品（手机电脑 &#x2F; 汽车）+ 消费主义盛行，所以<strong>需要高薪的工作</strong></li><li>人太多，资源逐渐有限，所以<strong>需要竞争</strong></li></ul><p>当这几个假设合理后，继续讨论原因：</p><ol><li><strong>工作与学历挂钩：</strong> 在过去的几十年中，伴随着中国经济的高速增长，高学历往往与稳定高薪的工作划上等号。在蓝领工作环境与收入都处于劣势的情况下，人们自然想追求白领工作，而高等教育成为好工作的前提条件。</li><li><strong>传统观念与阶级流动：</strong> 中国古代有“万般皆下品，唯有读书高”的名言，几千年的科举制，是社会阶层流动的重要手段。到了现代，在原因1的背景下，越来越多的人将读书变为唯一的出路。我认为，<strong>教育是中产阶级延续财产的不二法门，更是底层民众逆天改命的唯一途径</strong>。</li><li><strong>社会评价体系单一：</strong> 社会对个体价值的评价往往基于学历和职业。在就业环境不好的现实环境下，大学生感受到来自社会的巨大压力，推动他们沿着事先规划好的路径前进。</li><li><strong>教育产业化与竞争激烈:</strong> 随着教育的商业化趋势，越来越多人获得本科教育，导致学历贬值，就业竞争激烈，学生和家长面临的压力不断增加。大家不得不内卷。</li><li><strong>教育脱离学生</strong>：课程乏味，外界诱惑太多，导致学生难以在课堂上集中精力。</li></ol><h3 id="能否改变-amp-如何改变？"><a href="#能否改变-amp-如何改变？" class="headerlink" title="能否改变 &amp; 如何改变？"></a>能否改变 &amp; 如何改变？</h3><h4 id="学生"><a href="#学生" class="headerlink" title="学生"></a>学生</h4><ol><li><strong>勇于探索</strong>：尽可能多地接触新鲜事物 &amp; 新鲜知识，培养兴趣爱好，<strong>增加知识的宽度</strong>。不能被大数据牵着走，打破信息茧房。</li><li><strong>深入钻研</strong>：在有了一定的兴趣爱好后，发掘自己的热情，并在热情领域深耕，<strong>增加知识的深度</strong>。</li><li><strong>必要的运气</strong>：积德行善吧，没什么好办法</li></ol><h4 id="老师"><a href="#老师" class="headerlink" title="老师"></a>老师</h4><ol><li>老师花更多时间备课：停止使用老旧PPT&#x2F;知识，尽量传输较新的知识</li><li>授课时与实际相结合：停止死记硬背 与 填鸭式教学</li><li>停止无意义的点名签到：域民不以封疆之界，固国不以山溪之险，威学生不以签到点名之利</li></ol><h4 id="学校"><a href="#学校" class="headerlink" title="学校"></a>学校</h4><ol><li><strong>与工业界结合</strong>：放下象牙塔的骄傲，与工业界合作，联合培养学生</li><li><strong>强调人文素养:</strong> 加强对人文素养的培养，使学生在专业技能之外也具备更全面的能力，更好地适应社会的发展。</li><li><strong>兴趣导向</strong>：停止教学大纲导向</li></ol><h4 id="社会"><a href="#社会" class="headerlink" title="社会"></a>社会</h4><ol><li><strong>拓宽评价标准:</strong> 改变对学历的单一评价标准，引入更多多元化的评价体系，包括技能、经验和创新能力。</li><li><strong>提倡终身学习:</strong> 鼓励学生树立终身学习的观念，不仅仅在大学期间，而是在职场中持续提升自己。</li></ol><p><strong>结语:</strong> 大学生活虽然现在更像是一条流水线，但我们有机会通过改革教育体系，打破既有模式，使得大学真正成为学生综合发展的舞台。这需要学生、老师、学校和社会的共同努力，以确保每个大学生都能够在这个社会上找到属于自己的独特路径。</p><p>该图片由<a href="https://pixabay.com/zh/users/nikolayhg-3248/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=105709">Nikolay Georgiev</a>在<a href="https://pixabay.com/zh//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=105709">Pixabay</a>上发布</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>IDEA</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>教育</tag>
+      
+      <tag>大学</tag>
+      
+      <tag>社会</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>为什么不想生育?</title>
     <link href="/post/9c716de4.html"/>
     <url>/post/9c716de4.html</url>
@@ -44,7 +73,7 @@
     
     <categories>
       
-      <category>IDEAS</category>
+      <category>IDEA</category>
       
     </categories>
     
@@ -68,7 +97,7 @@
     <link href="/post/fa44022b.html"/>
     <url>/post/fa44022b.html</url>
     
-    <content type="html"><![CDATA[<h2 id="歌词"><a href="#歌词" class="headerlink" title="歌词"></a>歌词</h2><ul><li>游客是你，风景是我，无法避免，让你经过。蔷薇如期盛放，游人如期过路，情人如期相爱，然后分开，仿佛命书中批过。——《游客》</li><li>青春的快餐只要求快不理哪一家，哪有玩味的空档来欣赏细致淡雅。——《苦瓜》</li><li>开始时捱一些苦，栽种绝处的花，幸得艰辛的引路甜蜜不致太寡。——《苦瓜》</li><li>从何时你也学会不要离群，从何时发觉没有同伴不行，从何时惋惜蝴蝶困于那桃源，飞多远有谁会对他操心。                       ——《任我行》</li><li>亲爱的，等遍所有绿灯，还是让自己疯一下要紧，马路戏院商店天空海阔，任你行。 ——《任我行》</li></ul><h2 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h2><ul><li>经济基础决定上层建筑，生产力决定生产关系。 ——《共产党宣言》</li><li>男人的极大幸运在于，他不论在成年还是在小时候，必须踏上一条极为艰苦的道路，不过这是一条最可靠的道路；女人的不幸则在于被几乎不可抗拒的诱惑包围着；她不被要求奋发向上，只被鼓励滑下去到达极乐。当她发觉自己被海市蜃楼愚弄时，已经为时太晚，她的力量在失败的冒险中已被耗尽。 —— 波伏娃《第二性》</li></ul><h2 id="名人"><a href="#名人" class="headerlink" title="名人"></a>名人</h2><ul><li>吏不畏吾严而畏吾廉，民不服吾能而服吾公。—— 明代曹端《官箴》</li></ul><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul><li>当一个人只有锤子的时候，他看什么都像是钉子</li></ul>]]></content>
+    <content type="html"><![CDATA[<h2 id="歌词"><a href="#歌词" class="headerlink" title="歌词"></a>歌词</h2><ul><li>游客是你，风景是我，无法避免，让你经过。蔷薇如期盛放，游人如期过路，情人如期相爱，然后分开，仿佛命书中批过。——《游客》</li><li>青春的快餐只要求快不理哪一家，哪有玩味的空档来欣赏细致淡雅。——《苦瓜》</li><li>开始时捱一些苦，栽种绝处的花，幸得艰辛的引路甜蜜不致太寡。——《苦瓜》</li><li>从何时你也学会不要离群，从何时发觉没有同伴不行，从何时惋惜蝴蝶困于那桃源，飞多远有谁会对他操心。                       ——《任我行》</li><li>亲爱的，等遍所有绿灯，还是让自己疯一下要紧，马路戏院商店天空海阔，任你行。 ——《任我行》</li></ul><h2 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h2><ul><li>经济基础决定上层建筑，生产力决定生产关系。 ——《共产党宣言》</li><li>男人的极大幸运在于，他不论在成年还是在小时候，必须踏上一条极为艰苦的道路，不过这是一条最可靠的道路；女人的不幸则在于被几乎不可抗拒的诱惑包围着；她不被要求奋发向上，只被鼓励滑下去到达极乐。当她发觉自己被海市蜃楼愚弄时，已经为时太晚，她的力量在失败的冒险中已被耗尽。 —— 波伏娃《第二性》</li></ul><h2 id="影视剧"><a href="#影视剧" class="headerlink" title="影视剧"></a>影视剧</h2><ul><li>阳光洒在肩头，而我们彷佛一位自由人。——《肖申克的救赎》</li></ul><h2 id="名人"><a href="#名人" class="headerlink" title="名人"></a>名人</h2><ul><li>吏不畏吾严而畏吾廉，民不服吾能而服吾公。—— 明代曹端《官箴》</li><li>He who does not move does not notice his chains. ——Rosa Luxemburg</li></ul><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul><li>当一个人只有锤子的时候，他看什么都像是钉子</li></ul>]]></content>
     
     
     <categories>
@@ -167,11 +196,11 @@
       
       <tag>Game</tag>
       
+      <tag>RPG</tag>
+      
       <tag>黑死病</tag>
       
       <tag>瘟疫传说</tag>
-      
-      <tag>RPG</tag>
       
     </tags>
     
@@ -196,9 +225,9 @@
     
     <tags>
       
-      <tag>OS</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>OS</tag>
       
     </tags>
     
@@ -238,7 +267,7 @@
     <link href="/post/9be3c0b.html"/>
     <url>/post/9be3c0b.html</url>
     
-    <content type="html"><![CDATA[<h2 id="序幕"><a href="#序幕" class="headerlink" title="序幕"></a>序幕</h2><p>我们行走在14世纪的法国</p><p>看着14世纪欧洲的风土人情</p><p>两个人</p><p>一姐一弟</p><p>从陌生到熟悉再到依赖</p><p>沉浸式的体验</p><p>无论剧情抑或环境，无论背景还是配乐</p><p>都让我身临其境</p><p>Immersive</p><h2 id="开端"><a href="#开端" class="headerlink" title="开端"></a>开端</h2><p>一开始为贵族后裔，在城堡里过着无忧无虑的生活</p><p>却突然遇到变故，父母双亡，14岁少女不得不带着5岁弟弟逃亡</p><p>困难不必多言，众多朋友是唯一的慰藉</p><p>炼金术士卢卡斯帮忙各种技能点</p><p>盗贼兄妹为钱而加入</p><p>铁匠儿子为父报仇</p><p>小伙伴越来越多</p><p>敌人越来越强</p><p>主人公亦在随着玩家一起稳步成长</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/49b09e_a635cd300b82494794f7d95f4a55a9c9~mv2.jpg"></p><h2 id="情节"><a href="#情节" class="headerlink" title="情节"></a>情节</h2><p>单看情节，印象比较深的应该是苦修这一章</p><p>本以为是自己修炼技能，提高战斗水平</p><p>没想到修的是心</p><p>发现弟弟不见，姐姐一路寻找，遇上幻觉。经历劳伦提斯和妈妈的重重对话，最终是雨果对于受骗（姐姐不告诉弟弟妈妈还活着）的愤怒，毕竟小孩子。后来回到幻觉的庄园，在地底是比较震撼的一幕，本来是正常黑色的骨头组成通道，后来是一路上杀的敌人的尸体。姐姐却不害怕，表明自己仍然会为了弟弟再杀一遍，其声嘶力竭的吼声彰显对弟弟越来越深的爱</p><p>随后迎来老鼠，成功在老鼠里游泳（真的很奇妙的感觉）。后来阿米西亚看到尼古拉斯带走雨果，直接崩溃，绝望地将一直以来视为最大敌人的尼古拉斯称为大人。</p><p>或许在雨果第一次为姐姐戴花时，阿米西亚就已经决定要照顾好自己的弟弟——自己剩下的唯一的亲人。</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/49b09e_9d64b48952b043f1a057472f22283563~mv2.jpg"></p><p>姐姐一个人的时候，看见好的东西，棋子或者苹果，都会想到弟弟，这个细节无疑说出了姐姐对于的爱。弟弟也很依赖姐姐，但毕竟5年大多数和妈妈度过，所以自己一个人去找妈妈也能说得通（虽然还是被抓了）</p><p>敌人AI虽然低，但还是有两个地方卡了很久。一个是那个尼古拉斯的秦王绕柱走，最后真的运气好过的。另外就是最后的黑白大战，两个加起来死了应该有30次还多，但总之，I did it.</p><p>其实说实话，打不过的时候，也考虑过要不不打了，看解说云通关吧，但是又不甘心，之前已经经历过那么多了，感觉一定要打过去才行</p><p>以上想到哪写哪，可谓不知所言。</p><h2 id="感言"><a href="#感言" class="headerlink" title="感言"></a>感言</h2><p>手残党20h通关</p><p>我得到了什么？？？</p><p>在气氛优美的法国小镇里体会中世纪的异域风情</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105223927778.png"></p><p>在铺天盖地的老鼠与敌人前保持镇定，临危不乱</p><p>了解历史上造成一亿人死亡的黑死病在当时到底是何种程度的危害</p><p>（当时全世界4亿人）</p><p>看到了无论底层人民还是中产阶级在面对死亡时的恐惧与悲哀</p><p>人性罪恶与美善相得益彰</p><p>收获一份姐弟亲情，面对鼠群时，相互依靠，给予对方精神上的鼓励</p><p>虽然很多时候两个人会拌嘴，但是如果真的只有一个人的话，都是难以坚持的</p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105223951913.png" alt="image-20230105223951913" style="zoom:50%;" /><p>两个人面对江面，回想着这几天里的家庭变故，不知未来是否与这茫茫江水一样——不知从何来，不知往哪去——越想看清却越迷茫。</p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224011542.png" alt="image-20230105224011542" style="zoom:67%;" /><p>玩完游戏后，我也明白了火的意义——</p><p>除了如今点烟做饭杀人放火以外，</p><p>最初带给人们的，是远古时期在茫茫黑夜，阵阵狼嚎，一人踽踽独行时的温暖，希望，力量</p><p>当那压抑的黑色袭来时，火焰与光是唯一的救赎。</p><p>刚到城堡里时候，我们是多么地兴奋与安心，感觉外界的鼠患已经消失，一切是如此的明朗，天气晴朗，心情愉悦，大难不死，朋友在旁。</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224137298.png"></p><p>然而事与愿违，老鼠该来还是来，同样的，我们该拼搏，还是要拼搏反抗</p><p>穿过挂着犯人的装置时，是多么血腥，但是这就是历史上真实的尸横遍野与血流成河，感慨的同时，只能感恩如今的河清海晏。</p><p>感谢游戏组将我们带去中世纪欧洲</p><p>体会大名鼎鼎的黑死病</p><p>感谢如今医疗水平提高，科技发达</p><p>感谢人与人之间的爱与信任</p><h3 id="END"><a href="#END" class="headerlink" title="END"></a>END</h3><h3 id=""><a href="#" class="headerlink" title=""></a><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224235991.png"></h3><p>本文为原创，如有图片侵权请与作者联系：<a href="mailto:&#104;&#x31;&#x39;&#54;&#52;&#x36;&#51;&#52;&#51;&#x34;&#x39;&#x40;&#x31;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;">&#104;&#x31;&#x39;&#54;&#52;&#x36;&#51;&#52;&#51;&#x34;&#x39;&#x40;&#x31;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="序幕"><a href="#序幕" class="headerlink" title="序幕"></a>序幕</h2><p>我们行走在14世纪的法国</p><p>看着14世纪欧洲的风土人情</p><p>两个人</p><p>一姐一弟</p><p>从陌生到熟悉再到依赖</p><p>沉浸式的体验</p><p>无论剧情抑或环境，无论背景还是配乐</p><p>都让我身临其境</p><p>Immersive</p><h2 id="开端"><a href="#开端" class="headerlink" title="开端"></a>开端</h2><p>一开始为贵族后裔，在城堡里过着无忧无虑的生活</p><p>却突然遇到变故，父母双亡，14岁少女不得不带着5岁弟弟逃亡</p><p>困难不必多言，众多朋友是唯一的慰藉</p><p>炼金术士卢卡斯帮忙各种技能点</p><p>盗贼兄妹为钱而加入</p><p>铁匠儿子为父报仇</p><p>小伙伴越来越多</p><p>敌人越来越强</p><p>主人公亦在随着玩家一起稳步成长</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/49b09e_a635cd300b82494794f7d95f4a55a9c9~mv2.jpg"></p><h2 id="情节"><a href="#情节" class="headerlink" title="情节"></a>情节</h2><p>单看情节，印象比较深的应该是苦修这一章</p><p>本以为是自己修炼技能，提高战斗水平</p><p>没想到修的是心</p><p>发现弟弟不见，姐姐一路寻找，遇上幻觉。经历劳伦提斯和妈妈的重重对话，最终是雨果对于受骗（姐姐不告诉弟弟妈妈还活着）的愤怒，毕竟小孩子。后来回到幻觉的庄园，在地底是比较震撼的一幕，本来是正常黑色的骨头组成通道，后来是一路上杀的敌人的尸体。姐姐却不害怕，表明自己仍然会为了弟弟再杀一遍，其声嘶力竭的吼声彰显对弟弟越来越深的爱</p><p>随后迎来老鼠，成功在老鼠里游泳（真的很奇妙的感觉）。后来阿米西亚看到尼古拉斯带走雨果，直接崩溃，绝望地将一直以来视为最大敌人的尼古拉斯称为大人。</p><p>或许在雨果第一次为姐姐戴花时，阿米西亚就已经决定要照顾好自己的弟弟——自己剩下的唯一的亲人。</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/49b09e_9d64b48952b043f1a057472f22283563~mv2.jpg"></p><p>姐姐一个人的时候，看见好的东西，棋子或者苹果，都会想到弟弟，这个细节无疑说出了姐姐对于的爱。弟弟也很依赖姐姐，但毕竟5年大多数和妈妈度过，所以自己一个人去找妈妈也能说得通（虽然还是被抓了）</p><p>敌人AI虽然低，但还是有两个地方卡了很久。一个是那个尼古拉斯的秦王绕柱走，最后真的运气好过的。另外就是最后的黑白大战，两个加起来死了应该有30次还多，但总之，I did it.</p><p>其实说实话，打不过的时候，也考虑过要不不打了，看解说云通关吧，但是又不甘心，之前已经经历过那么多了，感觉一定要打过去才行</p><p>以上想到哪写哪，可谓不知所言。</p><h2 id="感言"><a href="#感言" class="headerlink" title="感言"></a>感言</h2><p>手残党20h通关</p><p>我得到了什么？？？</p><p>在气氛优美的法国小镇里体会中世纪的异域风情</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105223927778.png"></p><p>在铺天盖地的老鼠与敌人前保持镇定，临危不乱</p><p>了解历史上造成一亿人死亡的黑死病在当时到底是何种程度的危害</p><p>（当时全世界4亿人）</p><p>看到了无论底层人民还是中产阶级在面对死亡时的恐惧与悲哀</p><p>人性罪恶与美善相得益彰</p><p>收获一份姐弟亲情，面对鼠群时，相互依靠，给予对方精神上的鼓励</p><p>虽然很多时候两个人会拌嘴，但是如果真的只有一个人的话，都是难以坚持的</p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105223951913.png" alt="image-20230105223951913" style="zoom:50%;" /><p>两个人面对江面，回想着这几天里的家庭变故，不知未来是否与这茫茫江水一样——不知从何来，不知往哪去——越想看清却越迷茫。</p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224011542.png" alt="image-20230105224011542" style="zoom:67%;" /><p>玩完游戏后，我也明白了火的意义——</p><p>除了如今点烟做饭杀人放火以外，</p><p>最初带给人们的，是远古时期在茫茫黑夜，阵阵狼嚎，一人踽踽独行时的温暖，希望，力量</p><p>当那压抑的黑色袭来时，火焰与光是唯一的救赎。</p><p>刚到城堡里时候，我们是多么地兴奋与安心，感觉外界的鼠患已经消失，一切是如此的明朗，天气晴朗，心情愉悦，大难不死，朋友在旁。</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224137298.png"></p><p>然而事与愿违，老鼠该来还是来，同样的，我们该拼搏，还是要拼搏反抗</p><p>穿过挂着犯人的装置时，是多么血腥，但是这就是历史上真实的尸横遍野与血流成河，感慨的同时，只能感恩如今的河清海晏。</p><p>感谢游戏组将我们带去中世纪欧洲</p><p>体会大名鼎鼎的黑死病</p><p>感谢如今医疗水平提高，科技发达</p><p>感谢人与人之间的爱与信任</p><h3 id="END"><a href="#END" class="headerlink" title="END"></a>END</h3><h3 id=""><a href="#" class="headerlink" title=""></a><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224235991.png"></h3><p>本文为原创，如有图片侵权请与作者联系：<a href="mailto:&#104;&#49;&#x39;&#x36;&#x34;&#54;&#51;&#52;&#x33;&#x34;&#x39;&#64;&#x31;&#x36;&#51;&#46;&#99;&#x6f;&#x6d;">&#104;&#49;&#x39;&#x36;&#x34;&#54;&#51;&#52;&#x33;&#x34;&#x39;&#64;&#x31;&#x36;&#51;&#46;&#99;&#x6f;&#x6d;</a></p>]]></content>
     
     
     <categories>
@@ -252,11 +281,11 @@
       
       <tag>Game</tag>
       
+      <tag>RPG</tag>
+      
       <tag>黑死病</tag>
       
       <tag>瘟疫传说</tag>
-      
-      <tag>RPG</tag>
       
     </tags>
     
@@ -397,13 +426,13 @@
     
     <tags>
       
-      <tag>C++</tag>
-      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
       
       <tag>技术</tag>
+      
+      <tag>C++</tag>
       
     </tags>
     
@@ -428,13 +457,13 @@
     
     <tags>
       
-      <tag>C++</tag>
-      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
       
       <tag>技术</tag>
+      
+      <tag>C++</tag>
       
     </tags>
     
@@ -486,13 +515,13 @@
     
     <tags>
       
+      <tag>算法</tag>
+      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
       
       <tag>技术</tag>
-      
-      <tag>算法</tag>
       
     </tags>
     
@@ -546,11 +575,11 @@
     
     <tags>
       
-      <tag>C++</tag>
-      
       <tag>Developer</tag>
       
       <tag>技术</tag>
+      
+      <tag>C++</tag>
       
       <tag>Java</tag>
       
@@ -666,13 +695,13 @@
     
     <tags>
       
+      <tag>算法</tag>
+      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
       
       <tag>技术</tag>
-      
-      <tag>算法</tag>
       
       <tag>动态规划</tag>
       
@@ -699,13 +728,13 @@
     
     <tags>
       
+      <tag>算法</tag>
+      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
       
       <tag>技术</tag>
-      
-      <tag>算法</tag>
       
       <tag>二分</tag>
       
@@ -823,13 +852,13 @@
     
     <tags>
       
-      <tag>C++</tag>
-      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
       
       <tag>技术</tag>
+      
+      <tag>C++</tag>
       
       <tag>C#</tag>
       
