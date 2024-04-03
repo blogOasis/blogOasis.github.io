@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>python @property decorator</title>
+    <link href="/post/6541701.html"/>
+    <url>/post/6541701.html</url>
+    
+    <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>遇到 <code>@property</code> 属性相关的问题，详情为：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">## 可以工作</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">str</span> = <span class="hljs-string">&quot;abc&quot;</span><br>        <span class="hljs-comment"># print(type(self.get_a_array))</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">str</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> self.get_a_array:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;str is not in array&quot;</span>)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;str is in array&quot;</span>)<br><br><span class="hljs-meta">    @property</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_a_array</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">list</span>:<br>        <span class="hljs-keyword">return</span> [<span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;xyz&quot;</span>]<br>    <br><span class="hljs-comment">## 报错：TypeError: argument of type &#x27;property&#x27; is not iterable</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>:<br><span class="hljs-meta">    @classmethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>(<span class="hljs-params">cls</span>):<br>        <span class="hljs-built_in">str</span> = <span class="hljs-string">&quot;abc&quot;</span><br>        <span class="hljs-comment"># print(type(cls.get_a_array))</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">str</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> cls.get_a_array:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;str is not in array&quot;</span>)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;str is in array&quot;</span>)<br><br><span class="hljs-meta">    @property</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_a_array</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">list</span>:<br>        <span class="hljs-keyword">return</span> [<span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;xyz&quot;</span>]<br></code></pre></td></tr></table></figure><p>可以看到唯一的区别在于调用该属性的位置：一个在实例方法内，一个在类方法中。</p><p>加上类型的输出，得到类B中 <code>get_a_array</code> 属性为 <code>list</code>，而类A中<code>get_a_array</code>属性为<code>&lt;class &#39;property&#39;&gt;</code>，因此查阅相关文献，书写博客</p><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>在Python中，<code>@property</code>装饰器是一种用于创建只读属性的方法。它允许类的方法被当作属性来访问，这意味着你可以像访问数据属性一样访问这些方法，而不需要在方法名后加上括号。这种机制提供了一种更加优雅的方式来实现对类内部数据的封装和访问控制。</p><p>当你在类定义中使用<code>@property</code>装饰器时，你实际上是在创建一个描述符（descriptor）。描述符是Python中的一种协议，它允许对象自定义它们的属性访问。具体来说，当你使用<code>@property</code>装饰一个方法时，Python会创建一个属性对象，这个对象有一个<code>__get__</code>方法，该方法在访问属性时被调用。</p><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">@property</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_a_array</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">list</span>:<br>    <span class="hljs-keyword">return</span> [<span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;xyz&quot;</span>]<br></code></pre></td></tr></table></figure><p>这里，<code>get_a_array</code>被定义为一个只读属性，它的值是一个列表<code>[&quot;abc&quot;, &quot;xyz&quot;]</code>。在类的实例上访问这个属性时，Python会自动调用<code>__get__</code>方法，返回方法的返回值。因此，在实例方法中，<code>get_a_array</code>的类型是<code>list</code>，因为实际上访问的是方法的返回值。</p><p>然而，在类方法中，情况有所不同。当直接通过类访问<code>get_a_array</code>时，实际上访问的是<strong>属性对象本身</strong>，而不是属性的值。这是因为在这种情况下，没有实例来调用<code>__get__</code>方法。因此，在类方法中，<code>get_a_array</code>的类型是<code>property</code>。</p><p>这种行为的根本原因在于描述符协议的工作方式。描述符协议定义了对象如何通过<code>__get__</code>、<code>__set__</code>和<code>__delete__</code>方法来控制对其属性的访问。当属性被访问时，如果存在相应的描述符方法，Python会调用这些方法。在<code>@property</code>的情况下，只定义了<code>__get__</code>方法，这使得属性成为只读的。当通过实例访问属性时，<code>__get__</code>方法被调用，返回方法的返回值。但是，当通过类访问属性时，没有实例来调用<code>__get__</code>方法，因此你直接访问的是属性对象本身。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总结来说，<code>@property</code>装饰器的行为依赖于它是如何被访问的——通过实例还是通过类。</p><p>这解释了为什么在实例方法中<code>get_a_array</code>的类型是<code>list</code>，而在类方法中其类型是<code>property</code>。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Geek</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>技术</tag>
+      
+      <tag>Developer</tag>
+      
+      <tag>Programming</tag>
+      
+      <tag>Python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>家庭网络设备与拓扑</title>
     <link href="/post/3e2ea961.html"/>
     <url>/post/3e2ea961.html</url>
@@ -51,9 +82,9 @@
       
       <tag>博客</tag>
       
-      <tag>笔记</tag>
-      
       <tag>总结</tag>
+      
+      <tag>笔记</tag>
       
     </tags>
     
@@ -111,9 +142,9 @@
       
       <tag>教育</tag>
       
-      <tag>生育</tag>
-      
       <tag>哲学</tag>
+      
+      <tag>生育</tag>
       
     </tags>
     
@@ -198,9 +229,9 @@
       
       <tag>git</tag>
       
-      <tag>ssh</tag>
-      
       <tag>Python</tag>
+      
+      <tag>ssh</tag>
       
       <tag>VIm</tag>
       
@@ -325,7 +356,7 @@
     <link href="/post/9be3c0b.html"/>
     <url>/post/9be3c0b.html</url>
     
-    <content type="html"><![CDATA[<h2 id="序幕"><a href="#序幕" class="headerlink" title="序幕"></a>序幕</h2><p>我们行走在14世纪的法国</p><p>看着14世纪欧洲的风土人情</p><p>两个人</p><p>一姐一弟</p><p>从陌生到熟悉再到依赖</p><p>沉浸式的体验</p><p>无论剧情抑或环境，无论背景还是配乐</p><p>都让我身临其境</p><p>Immersive</p><h2 id="开端"><a href="#开端" class="headerlink" title="开端"></a>开端</h2><p>一开始为贵族后裔，在城堡里过着无忧无虑的生活</p><p>却突然遇到变故，父母双亡，14岁少女不得不带着5岁弟弟逃亡</p><p>困难不必多言，众多朋友是唯一的慰藉</p><p>炼金术士卢卡斯帮忙各种技能点</p><p>盗贼兄妹为钱而加入</p><p>铁匠儿子为父报仇</p><p>小伙伴越来越多</p><p>敌人越来越强</p><p>主人公亦在随着玩家一起稳步成长</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/49b09e_a635cd300b82494794f7d95f4a55a9c9~mv2.jpg"></p><h2 id="情节"><a href="#情节" class="headerlink" title="情节"></a>情节</h2><p>单看情节，印象比较深的应该是苦修这一章</p><p>本以为是自己修炼技能，提高战斗水平</p><p>没想到修的是心</p><p>发现弟弟不见，姐姐一路寻找，遇上幻觉。经历劳伦提斯和妈妈的重重对话，最终是雨果对于受骗（姐姐不告诉弟弟妈妈还活着）的愤怒，毕竟小孩子。后来回到幻觉的庄园，在地底是比较震撼的一幕，本来是正常黑色的骨头组成通道，后来是一路上杀的敌人的尸体。姐姐却不害怕，表明自己仍然会为了弟弟再杀一遍，其声嘶力竭的吼声彰显对弟弟越来越深的爱</p><p>随后迎来老鼠，成功在老鼠里游泳（真的很奇妙的感觉）。后来阿米西亚看到尼古拉斯带走雨果，直接崩溃，绝望地将一直以来视为最大敌人的尼古拉斯称为大人。</p><p>或许在雨果第一次为姐姐戴花时，阿米西亚就已经决定要照顾好自己的弟弟——自己剩下的唯一的亲人。</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/49b09e_9d64b48952b043f1a057472f22283563~mv2.jpg"></p><p>姐姐一个人的时候，看见好的东西，棋子或者苹果，都会想到弟弟，这个细节无疑说出了姐姐对于的爱。弟弟也很依赖姐姐，但毕竟5年大多数和妈妈度过，所以自己一个人去找妈妈也能说得通（虽然还是被抓了）</p><p>敌人AI虽然低，但还是有两个地方卡了很久。一个是那个尼古拉斯的秦王绕柱走，最后真的运气好过的。另外就是最后的黑白大战，两个加起来死了应该有30次还多，但总之，I did it.</p><p>其实说实话，打不过的时候，也考虑过要不不打了，看解说云通关吧，但是又不甘心，之前已经经历过那么多了，感觉一定要打过去才行</p><p>以上想到哪写哪，可谓不知所言。</p><h2 id="感言"><a href="#感言" class="headerlink" title="感言"></a>感言</h2><p>手残党20h通关</p><p>我得到了什么？？？</p><p>在气氛优美的法国小镇里体会中世纪的异域风情</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105223927778.png"></p><p>在铺天盖地的老鼠与敌人前保持镇定，临危不乱</p><p>了解历史上造成一亿人死亡的黑死病在当时到底是何种程度的危害</p><p>（当时全世界4亿人）</p><p>看到了无论底层人民还是中产阶级在面对死亡时的恐惧与悲哀</p><p>人性罪恶与美善相得益彰</p><p>收获一份姐弟亲情，面对鼠群时，相互依靠，给予对方精神上的鼓励</p><p>虽然很多时候两个人会拌嘴，但是如果真的只有一个人的话，都是难以坚持的</p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105223951913.png" alt="image-20230105223951913" style="zoom:50%;" /><p>两个人面对江面，回想着这几天里的家庭变故，不知未来是否与这茫茫江水一样——不知从何来，不知往哪去——越想看清却越迷茫。</p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224011542.png" alt="image-20230105224011542" style="zoom:67%;" /><p>玩完游戏后，我也明白了火的意义——</p><p>除了如今点烟做饭杀人放火以外，</p><p>最初带给人们的，是远古时期在茫茫黑夜，阵阵狼嚎，一人踽踽独行时的温暖，希望，力量</p><p>当那压抑的黑色袭来时，火焰与光是唯一的救赎。</p><p>刚到城堡里时候，我们是多么地兴奋与安心，感觉外界的鼠患已经消失，一切是如此的明朗，天气晴朗，心情愉悦，大难不死，朋友在旁。</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224137298.png"></p><p>然而事与愿违，老鼠该来还是来，同样的，我们该拼搏，还是要拼搏反抗</p><p>穿过挂着犯人的装置时，是多么血腥，但是这就是历史上真实的尸横遍野与血流成河，感慨的同时，只能感恩如今的河清海晏。</p><p>感谢游戏组将我们带去中世纪欧洲</p><p>体会大名鼎鼎的黑死病</p><p>感谢如今医疗水平提高，科技发达</p><p>感谢人与人之间的爱与信任</p><h3 id="END"><a href="#END" class="headerlink" title="END"></a>END</h3><h3 id=""><a href="#" class="headerlink" title=""></a><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224235991.png"></h3><p>本文为原创，如有图片侵权请与作者联系：<a href="mailto:&#x68;&#49;&#x39;&#x36;&#x34;&#54;&#51;&#x34;&#x33;&#52;&#x39;&#x40;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#x6d;">&#x68;&#49;&#x39;&#x36;&#x34;&#54;&#51;&#x34;&#x33;&#52;&#x39;&#x40;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#x6d;</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="序幕"><a href="#序幕" class="headerlink" title="序幕"></a>序幕</h2><p>我们行走在14世纪的法国</p><p>看着14世纪欧洲的风土人情</p><p>两个人</p><p>一姐一弟</p><p>从陌生到熟悉再到依赖</p><p>沉浸式的体验</p><p>无论剧情抑或环境，无论背景还是配乐</p><p>都让我身临其境</p><p>Immersive</p><h2 id="开端"><a href="#开端" class="headerlink" title="开端"></a>开端</h2><p>一开始为贵族后裔，在城堡里过着无忧无虑的生活</p><p>却突然遇到变故，父母双亡，14岁少女不得不带着5岁弟弟逃亡</p><p>困难不必多言，众多朋友是唯一的慰藉</p><p>炼金术士卢卡斯帮忙各种技能点</p><p>盗贼兄妹为钱而加入</p><p>铁匠儿子为父报仇</p><p>小伙伴越来越多</p><p>敌人越来越强</p><p>主人公亦在随着玩家一起稳步成长</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/49b09e_a635cd300b82494794f7d95f4a55a9c9~mv2.jpg"></p><h2 id="情节"><a href="#情节" class="headerlink" title="情节"></a>情节</h2><p>单看情节，印象比较深的应该是苦修这一章</p><p>本以为是自己修炼技能，提高战斗水平</p><p>没想到修的是心</p><p>发现弟弟不见，姐姐一路寻找，遇上幻觉。经历劳伦提斯和妈妈的重重对话，最终是雨果对于受骗（姐姐不告诉弟弟妈妈还活着）的愤怒，毕竟小孩子。后来回到幻觉的庄园，在地底是比较震撼的一幕，本来是正常黑色的骨头组成通道，后来是一路上杀的敌人的尸体。姐姐却不害怕，表明自己仍然会为了弟弟再杀一遍，其声嘶力竭的吼声彰显对弟弟越来越深的爱</p><p>随后迎来老鼠，成功在老鼠里游泳（真的很奇妙的感觉）。后来阿米西亚看到尼古拉斯带走雨果，直接崩溃，绝望地将一直以来视为最大敌人的尼古拉斯称为大人。</p><p>或许在雨果第一次为姐姐戴花时，阿米西亚就已经决定要照顾好自己的弟弟——自己剩下的唯一的亲人。</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/49b09e_9d64b48952b043f1a057472f22283563~mv2.jpg"></p><p>姐姐一个人的时候，看见好的东西，棋子或者苹果，都会想到弟弟，这个细节无疑说出了姐姐对于的爱。弟弟也很依赖姐姐，但毕竟5年大多数和妈妈度过，所以自己一个人去找妈妈也能说得通（虽然还是被抓了）</p><p>敌人AI虽然低，但还是有两个地方卡了很久。一个是那个尼古拉斯的秦王绕柱走，最后真的运气好过的。另外就是最后的黑白大战，两个加起来死了应该有30次还多，但总之，I did it.</p><p>其实说实话，打不过的时候，也考虑过要不不打了，看解说云通关吧，但是又不甘心，之前已经经历过那么多了，感觉一定要打过去才行</p><p>以上想到哪写哪，可谓不知所言。</p><h2 id="感言"><a href="#感言" class="headerlink" title="感言"></a>感言</h2><p>手残党20h通关</p><p>我得到了什么？？？</p><p>在气氛优美的法国小镇里体会中世纪的异域风情</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105223927778.png"></p><p>在铺天盖地的老鼠与敌人前保持镇定，临危不乱</p><p>了解历史上造成一亿人死亡的黑死病在当时到底是何种程度的危害</p><p>（当时全世界4亿人）</p><p>看到了无论底层人民还是中产阶级在面对死亡时的恐惧与悲哀</p><p>人性罪恶与美善相得益彰</p><p>收获一份姐弟亲情，面对鼠群时，相互依靠，给予对方精神上的鼓励</p><p>虽然很多时候两个人会拌嘴，但是如果真的只有一个人的话，都是难以坚持的</p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105223951913.png" alt="image-20230105223951913" style="zoom:50%;" /><p>两个人面对江面，回想着这几天里的家庭变故，不知未来是否与这茫茫江水一样——不知从何来，不知往哪去——越想看清却越迷茫。</p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224011542.png" alt="image-20230105224011542" style="zoom:67%;" /><p>玩完游戏后，我也明白了火的意义——</p><p>除了如今点烟做饭杀人放火以外，</p><p>最初带给人们的，是远古时期在茫茫黑夜，阵阵狼嚎，一人踽踽独行时的温暖，希望，力量</p><p>当那压抑的黑色袭来时，火焰与光是唯一的救赎。</p><p>刚到城堡里时候，我们是多么地兴奋与安心，感觉外界的鼠患已经消失，一切是如此的明朗，天气晴朗，心情愉悦，大难不死，朋友在旁。</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224137298.png"></p><p>然而事与愿违，老鼠该来还是来，同样的，我们该拼搏，还是要拼搏反抗</p><p>穿过挂着犯人的装置时，是多么血腥，但是这就是历史上真实的尸横遍野与血流成河，感慨的同时，只能感恩如今的河清海晏。</p><p>感谢游戏组将我们带去中世纪欧洲</p><p>体会大名鼎鼎的黑死病</p><p>感谢如今医疗水平提高，科技发达</p><p>感谢人与人之间的爱与信任</p><h3 id="END"><a href="#END" class="headerlink" title="END"></a>END</h3><h3 id=""><a href="#" class="headerlink" title=""></a><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224235991.png"></h3><p>本文为原创，如有图片侵权请与作者联系：<a href="mailto:&#104;&#x31;&#x39;&#x36;&#x34;&#54;&#51;&#52;&#x33;&#x34;&#57;&#x40;&#49;&#54;&#x33;&#x2e;&#99;&#111;&#x6d;">&#104;&#x31;&#x39;&#x36;&#x34;&#54;&#51;&#52;&#x33;&#x34;&#57;&#x40;&#49;&#54;&#x33;&#x2e;&#99;&#111;&#x6d;</a></p>]]></content>
     
     
     <categories>
@@ -486,11 +517,11 @@
       
       <tag>技术</tag>
       
-      <tag>C++</tag>
-      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
+      
+      <tag>C++</tag>
       
     </tags>
     
@@ -517,11 +548,11 @@
       
       <tag>技术</tag>
       
-      <tag>C++</tag>
-      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
+      
+      <tag>C++</tag>
       
     </tags>
     
@@ -575,11 +606,11 @@
       
       <tag>技术</tag>
       
+      <tag>算法</tag>
+      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
-      
-      <tag>算法</tag>
       
     </tags>
     
@@ -635,9 +666,9 @@
       
       <tag>技术</tag>
       
-      <tag>C++</tag>
-      
       <tag>Developer</tag>
+      
+      <tag>C++</tag>
       
       <tag>Java</tag>
       
@@ -755,11 +786,11 @@
       
       <tag>技术</tag>
       
+      <tag>算法</tag>
+      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
-      
-      <tag>算法</tag>
       
       <tag>动态规划</tag>
       
@@ -788,11 +819,11 @@
       
       <tag>技术</tag>
       
+      <tag>算法</tag>
+      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
-      
-      <tag>算法</tag>
       
       <tag>二分</tag>
       
@@ -912,11 +943,11 @@
       
       <tag>技术</tag>
       
-      <tag>C++</tag>
-      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
+      
+      <tag>C++</tag>
       
       <tag>C#</tag>
       
