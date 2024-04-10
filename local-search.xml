@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>深入探讨git与ssh config (多个git账户配置与连接)</title>
+    <link href="/post/800844d7.html"/>
+    <url>/post/800844d7.html</url>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在使用Git和GitHub &#x2F; Gitlab进行项目管理和代码托管时，开发者可能会遇到需要同时管理多个GitHub账户的情况。这种需求可能源于个人和工作项目之间的区分，或者参与多个组织的开发工作。然而，Git和SSH的默认配置并不直接支持轻松切换多个账户，这就需要一些额外的配置和策略来解决。</p><p>对于笔者，同时需要连接到github和gitlab，于是在ssh下面的config文件进行了配置。</p><h2 id="问题起源"><a href="#问题起源" class="headerlink" title="问题起源"></a>问题起源</h2><p>在进行github连接的时候，首先在<code>~/.ssh/config</code>配置了如下内容：</p><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">Host github<br>  HostName github.com<br>  <span class="hljs-keyword">User</span> <span class="hljs-title">git</span><br>  IdentityFile abc (a private key)<br></code></pre></td></tr></table></figure><p>运行情况：</p><ol><li><code>ssh -T github</code>, 成功</li><li><code>ssh -T git@github.com</code>，成功</li><li><code>git clone git@github.com:myusername/repo.git</code> (这个仓库是一个私有仓库)，失败。报错信息：</li></ol>  <figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gauss">git<span class="hljs-comment">@github.com: Permission denied (publickey).fatal: Could not read from remote repository.</span><br><span class="hljs-comment">Please make sure you have the correct access rights and the repository exists</span><br></code></pre></td></tr></table></figure><ol start="4"><li>将.ssh&#x2F;configHost改为<code>github.com</code>, 情况3成功</li></ol><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p><code>Host github</code>定义了一个SSH配置的别名<code>github</code>，这意味着当你使用SSH或Git命令与GitHub通信时，可以使用这个别名来<strong>引用整个配置块</strong>。即别名Host &#x3D; HostName + User + IdentifyFile。</p><p>基于这个原因，我们就理解了下面的图：</p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20240410125934423.png" alt="image-20240410125934423" style="zoom:50%;" /><p>当<strong>直接通过ssh连接的时候，SSH可以通过Host找到HostName，也可以根据HostName找到同级下面的key</strong>，所以成功。</p><p>但是，</p><p>在使用<code>git clone</code>命令时，如果直接使用<code>git@github.com:USER/REPOSITORY.git</code>这样的URL，相当于提供了完整主机名，Git客户端内部会调用SSH客户端(而且用户名都是git)，此时SSH客户端，也会根据<code>~/.ssh/config</code>中的配置来尝试解析主机名<code>github.com</code>。如果找不到有关github.com的配置，就会报错。此时不会根据github.com找到同级的identify Key。</p><p>其实是合理的，因为如果像下面这样，有两个github账户，那么一个别名1，一个别名2，也无法找到需要哪个key，也就无法决定使用哪个账户clone。</p><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs crmsh"><span class="hljs-comment"># github1</span><br>Host github1<br>  HostName github.com<br>  <span class="hljs-keyword">User</span> <span class="hljs-title">git</span><br>  IdentityFile abc<br><span class="hljs-comment"># github2</span><br>Host github2<br>  HostName github.com<br>  <span class="hljs-keyword">User</span> <span class="hljs-title">git</span><br>  IdentityFile def<br></code></pre></td></tr></table></figure><p>所以必须手动提供这个别名，也就是必须改为<code>git@github:USER/REPO.git</code>。 这样的话，git里的ssh就可以从上到下找到正确的key</p><h2 id="问题回溯"><a href="#问题回溯" class="headerlink" title="问题回溯"></a>问题回溯</h2><p>谈到这里，我们就会发现，情况3失败是正常的，因为可能有多个github账户，于是现在问题变成了，情况2为什么可以？</p><p><code>ssh -vT git@github.com</code>，查看debug输出，发现其实这样能成功，无非是ssh把我本地的两个key都尝试提供了，然后第二个key刚好能连上。。。</p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20240410132928617.png" alt="image-20240410132928617" style="zoom:50%;" /><p>甚至进一步<code>ssh -vT git@github</code>，发现也会同时尝试两个key，只不过是优先使用匹配到的key连接。</p><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol><li>别名 &#x3D;&#x3D; 下面的所有配置块总和</li><li>当通过 ssh 直接连接的时候，优先查看是否匹配到了config文件中的某一行<ol><li>如果在config文件中找不到，会尝试本地所有的key</li><li>(注意) 即使在config文件中找到，也会尝试所有key，但是优先尝试匹配到的key （体现了ssh客户端本身的兼容性</li></ol></li><li>当通过 git 调用 ssh 的时候，由于git权限更加严格，因此不会尝试所有的key，而是严格匹配config文件。所以使用git连接多个账户时，无法使用标准URL，而是必须替换为别名。</li><li>另外git还有个<code>gitconfig</code>文件，允许使用从Github仓库页面复制的标准url。可以免去把 github.com 改为自定义主机名的麻烦。</li></ol><h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><p>或许之后再研究下gitconfig</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol><li><a href="https://gist.github.com/oanhnn/80a89405ab9023894df7">https://gist.github.com/oanhnn/80a89405ab9023894df7</a></li><li><a href="https://zian999.github.io/zh/posts/2020/20200122-generate_ssh_key_and_ssh_config/">https://zian999.github.io/zh/posts/2020/20200122-generate_ssh_key_and_ssh_config/</a></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>Geek</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Developer</tag>
+      
+      <tag>git</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>python @property decorator</title>
     <link href="/post/6541701.html"/>
     <url>/post/6541701.html</url>
@@ -82,9 +109,9 @@
       
       <tag>博客</tag>
       
-      <tag>总结</tag>
-      
       <tag>笔记</tag>
+      
+      <tag>总结</tag>
       
     </tags>
     
@@ -142,9 +169,9 @@
       
       <tag>教育</tag>
       
-      <tag>哲学</tag>
-      
       <tag>生育</tag>
+      
+      <tag>哲学</tag>
       
     </tags>
     
@@ -314,9 +341,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>OS</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -356,7 +383,7 @@
     <link href="/post/9be3c0b.html"/>
     <url>/post/9be3c0b.html</url>
     
-    <content type="html"><![CDATA[<h2 id="序幕"><a href="#序幕" class="headerlink" title="序幕"></a>序幕</h2><p>我们行走在14世纪的法国</p><p>看着14世纪欧洲的风土人情</p><p>两个人</p><p>一姐一弟</p><p>从陌生到熟悉再到依赖</p><p>沉浸式的体验</p><p>无论剧情抑或环境，无论背景还是配乐</p><p>都让我身临其境</p><p>Immersive</p><h2 id="开端"><a href="#开端" class="headerlink" title="开端"></a>开端</h2><p>一开始为贵族后裔，在城堡里过着无忧无虑的生活</p><p>却突然遇到变故，父母双亡，14岁少女不得不带着5岁弟弟逃亡</p><p>困难不必多言，众多朋友是唯一的慰藉</p><p>炼金术士卢卡斯帮忙各种技能点</p><p>盗贼兄妹为钱而加入</p><p>铁匠儿子为父报仇</p><p>小伙伴越来越多</p><p>敌人越来越强</p><p>主人公亦在随着玩家一起稳步成长</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/49b09e_a635cd300b82494794f7d95f4a55a9c9~mv2.jpg"></p><h2 id="情节"><a href="#情节" class="headerlink" title="情节"></a>情节</h2><p>单看情节，印象比较深的应该是苦修这一章</p><p>本以为是自己修炼技能，提高战斗水平</p><p>没想到修的是心</p><p>发现弟弟不见，姐姐一路寻找，遇上幻觉。经历劳伦提斯和妈妈的重重对话，最终是雨果对于受骗（姐姐不告诉弟弟妈妈还活着）的愤怒，毕竟小孩子。后来回到幻觉的庄园，在地底是比较震撼的一幕，本来是正常黑色的骨头组成通道，后来是一路上杀的敌人的尸体。姐姐却不害怕，表明自己仍然会为了弟弟再杀一遍，其声嘶力竭的吼声彰显对弟弟越来越深的爱</p><p>随后迎来老鼠，成功在老鼠里游泳（真的很奇妙的感觉）。后来阿米西亚看到尼古拉斯带走雨果，直接崩溃，绝望地将一直以来视为最大敌人的尼古拉斯称为大人。</p><p>或许在雨果第一次为姐姐戴花时，阿米西亚就已经决定要照顾好自己的弟弟——自己剩下的唯一的亲人。</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/49b09e_9d64b48952b043f1a057472f22283563~mv2.jpg"></p><p>姐姐一个人的时候，看见好的东西，棋子或者苹果，都会想到弟弟，这个细节无疑说出了姐姐对于的爱。弟弟也很依赖姐姐，但毕竟5年大多数和妈妈度过，所以自己一个人去找妈妈也能说得通（虽然还是被抓了）</p><p>敌人AI虽然低，但还是有两个地方卡了很久。一个是那个尼古拉斯的秦王绕柱走，最后真的运气好过的。另外就是最后的黑白大战，两个加起来死了应该有30次还多，但总之，I did it.</p><p>其实说实话，打不过的时候，也考虑过要不不打了，看解说云通关吧，但是又不甘心，之前已经经历过那么多了，感觉一定要打过去才行</p><p>以上想到哪写哪，可谓不知所言。</p><h2 id="感言"><a href="#感言" class="headerlink" title="感言"></a>感言</h2><p>手残党20h通关</p><p>我得到了什么？？？</p><p>在气氛优美的法国小镇里体会中世纪的异域风情</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105223927778.png"></p><p>在铺天盖地的老鼠与敌人前保持镇定，临危不乱</p><p>了解历史上造成一亿人死亡的黑死病在当时到底是何种程度的危害</p><p>（当时全世界4亿人）</p><p>看到了无论底层人民还是中产阶级在面对死亡时的恐惧与悲哀</p><p>人性罪恶与美善相得益彰</p><p>收获一份姐弟亲情，面对鼠群时，相互依靠，给予对方精神上的鼓励</p><p>虽然很多时候两个人会拌嘴，但是如果真的只有一个人的话，都是难以坚持的</p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105223951913.png" alt="image-20230105223951913" style="zoom:50%;" /><p>两个人面对江面，回想着这几天里的家庭变故，不知未来是否与这茫茫江水一样——不知从何来，不知往哪去——越想看清却越迷茫。</p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224011542.png" alt="image-20230105224011542" style="zoom:67%;" /><p>玩完游戏后，我也明白了火的意义——</p><p>除了如今点烟做饭杀人放火以外，</p><p>最初带给人们的，是远古时期在茫茫黑夜，阵阵狼嚎，一人踽踽独行时的温暖，希望，力量</p><p>当那压抑的黑色袭来时，火焰与光是唯一的救赎。</p><p>刚到城堡里时候，我们是多么地兴奋与安心，感觉外界的鼠患已经消失，一切是如此的明朗，天气晴朗，心情愉悦，大难不死，朋友在旁。</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224137298.png"></p><p>然而事与愿违，老鼠该来还是来，同样的，我们该拼搏，还是要拼搏反抗</p><p>穿过挂着犯人的装置时，是多么血腥，但是这就是历史上真实的尸横遍野与血流成河，感慨的同时，只能感恩如今的河清海晏。</p><p>感谢游戏组将我们带去中世纪欧洲</p><p>体会大名鼎鼎的黑死病</p><p>感谢如今医疗水平提高，科技发达</p><p>感谢人与人之间的爱与信任</p><h3 id="END"><a href="#END" class="headerlink" title="END"></a>END</h3><h3 id=""><a href="#" class="headerlink" title=""></a><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224235991.png"></h3><p>本文为原创，如有图片侵权请与作者联系：<a href="mailto:&#104;&#x31;&#x39;&#x36;&#x34;&#54;&#51;&#52;&#x33;&#x34;&#57;&#x40;&#49;&#54;&#x33;&#x2e;&#99;&#111;&#x6d;">&#104;&#x31;&#x39;&#x36;&#x34;&#54;&#51;&#52;&#x33;&#x34;&#57;&#x40;&#49;&#54;&#x33;&#x2e;&#99;&#111;&#x6d;</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="序幕"><a href="#序幕" class="headerlink" title="序幕"></a>序幕</h2><p>我们行走在14世纪的法国</p><p>看着14世纪欧洲的风土人情</p><p>两个人</p><p>一姐一弟</p><p>从陌生到熟悉再到依赖</p><p>沉浸式的体验</p><p>无论剧情抑或环境，无论背景还是配乐</p><p>都让我身临其境</p><p>Immersive</p><h2 id="开端"><a href="#开端" class="headerlink" title="开端"></a>开端</h2><p>一开始为贵族后裔，在城堡里过着无忧无虑的生活</p><p>却突然遇到变故，父母双亡，14岁少女不得不带着5岁弟弟逃亡</p><p>困难不必多言，众多朋友是唯一的慰藉</p><p>炼金术士卢卡斯帮忙各种技能点</p><p>盗贼兄妹为钱而加入</p><p>铁匠儿子为父报仇</p><p>小伙伴越来越多</p><p>敌人越来越强</p><p>主人公亦在随着玩家一起稳步成长</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/49b09e_a635cd300b82494794f7d95f4a55a9c9~mv2.jpg"></p><h2 id="情节"><a href="#情节" class="headerlink" title="情节"></a>情节</h2><p>单看情节，印象比较深的应该是苦修这一章</p><p>本以为是自己修炼技能，提高战斗水平</p><p>没想到修的是心</p><p>发现弟弟不见，姐姐一路寻找，遇上幻觉。经历劳伦提斯和妈妈的重重对话，最终是雨果对于受骗（姐姐不告诉弟弟妈妈还活着）的愤怒，毕竟小孩子。后来回到幻觉的庄园，在地底是比较震撼的一幕，本来是正常黑色的骨头组成通道，后来是一路上杀的敌人的尸体。姐姐却不害怕，表明自己仍然会为了弟弟再杀一遍，其声嘶力竭的吼声彰显对弟弟越来越深的爱</p><p>随后迎来老鼠，成功在老鼠里游泳（真的很奇妙的感觉）。后来阿米西亚看到尼古拉斯带走雨果，直接崩溃，绝望地将一直以来视为最大敌人的尼古拉斯称为大人。</p><p>或许在雨果第一次为姐姐戴花时，阿米西亚就已经决定要照顾好自己的弟弟——自己剩下的唯一的亲人。</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/49b09e_9d64b48952b043f1a057472f22283563~mv2.jpg"></p><p>姐姐一个人的时候，看见好的东西，棋子或者苹果，都会想到弟弟，这个细节无疑说出了姐姐对于的爱。弟弟也很依赖姐姐，但毕竟5年大多数和妈妈度过，所以自己一个人去找妈妈也能说得通（虽然还是被抓了）</p><p>敌人AI虽然低，但还是有两个地方卡了很久。一个是那个尼古拉斯的秦王绕柱走，最后真的运气好过的。另外就是最后的黑白大战，两个加起来死了应该有30次还多，但总之，I did it.</p><p>其实说实话，打不过的时候，也考虑过要不不打了，看解说云通关吧，但是又不甘心，之前已经经历过那么多了，感觉一定要打过去才行</p><p>以上想到哪写哪，可谓不知所言。</p><h2 id="感言"><a href="#感言" class="headerlink" title="感言"></a>感言</h2><p>手残党20h通关</p><p>我得到了什么？？？</p><p>在气氛优美的法国小镇里体会中世纪的异域风情</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105223927778.png"></p><p>在铺天盖地的老鼠与敌人前保持镇定，临危不乱</p><p>了解历史上造成一亿人死亡的黑死病在当时到底是何种程度的危害</p><p>（当时全世界4亿人）</p><p>看到了无论底层人民还是中产阶级在面对死亡时的恐惧与悲哀</p><p>人性罪恶与美善相得益彰</p><p>收获一份姐弟亲情，面对鼠群时，相互依靠，给予对方精神上的鼓励</p><p>虽然很多时候两个人会拌嘴，但是如果真的只有一个人的话，都是难以坚持的</p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105223951913.png" alt="image-20230105223951913" style="zoom:50%;" /><p>两个人面对江面，回想着这几天里的家庭变故，不知未来是否与这茫茫江水一样——不知从何来，不知往哪去——越想看清却越迷茫。</p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224011542.png" alt="image-20230105224011542" style="zoom:67%;" /><p>玩完游戏后，我也明白了火的意义——</p><p>除了如今点烟做饭杀人放火以外，</p><p>最初带给人们的，是远古时期在茫茫黑夜，阵阵狼嚎，一人踽踽独行时的温暖，希望，力量</p><p>当那压抑的黑色袭来时，火焰与光是唯一的救赎。</p><p>刚到城堡里时候，我们是多么地兴奋与安心，感觉外界的鼠患已经消失，一切是如此的明朗，天气晴朗，心情愉悦，大难不死，朋友在旁。</p><p><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224137298.png"></p><p>然而事与愿违，老鼠该来还是来，同样的，我们该拼搏，还是要拼搏反抗</p><p>穿过挂着犯人的装置时，是多么血腥，但是这就是历史上真实的尸横遍野与血流成河，感慨的同时，只能感恩如今的河清海晏。</p><p>感谢游戏组将我们带去中世纪欧洲</p><p>体会大名鼎鼎的黑死病</p><p>感谢如今医疗水平提高，科技发达</p><p>感谢人与人之间的爱与信任</p><h3 id="END"><a href="#END" class="headerlink" title="END"></a>END</h3><h3 id=""><a href="#" class="headerlink" title=""></a><img src="https://blog-image-store-73.oss-cn-shanghai.aliyuncs.com/images/image-20230105224235991.png"></h3><p>本文为原创，如有图片侵权请与作者联系：<a href="mailto:&#x68;&#49;&#57;&#54;&#52;&#54;&#51;&#x34;&#51;&#52;&#x39;&#x40;&#x31;&#54;&#x33;&#46;&#x63;&#111;&#109;">&#x68;&#49;&#57;&#54;&#52;&#54;&#51;&#x34;&#51;&#52;&#x39;&#x40;&#x31;&#54;&#x33;&#46;&#x63;&#111;&#109;</a></p>]]></content>
     
     
     <categories>
@@ -517,11 +544,11 @@
       
       <tag>技术</tag>
       
+      <tag>C++</tag>
+      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
-      
-      <tag>C++</tag>
       
     </tags>
     
@@ -548,11 +575,11 @@
       
       <tag>技术</tag>
       
+      <tag>C++</tag>
+      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
-      
-      <tag>C++</tag>
       
     </tags>
     
@@ -606,11 +633,11 @@
       
       <tag>技术</tag>
       
-      <tag>算法</tag>
-      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
+      
+      <tag>算法</tag>
       
     </tags>
     
@@ -666,9 +693,9 @@
       
       <tag>技术</tag>
       
-      <tag>Developer</tag>
-      
       <tag>C++</tag>
+      
+      <tag>Developer</tag>
       
       <tag>Java</tag>
       
@@ -755,9 +782,9 @@
     
     <tags>
       
-      <tag>人文情怀</tag>
-      
       <tag>资本论</tag>
+      
+      <tag>人文情怀</tag>
       
       <tag>王德峰</tag>
       
@@ -786,11 +813,11 @@
       
       <tag>技术</tag>
       
-      <tag>算法</tag>
-      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
+      
+      <tag>算法</tag>
       
       <tag>动态规划</tag>
       
@@ -819,11 +846,11 @@
       
       <tag>技术</tag>
       
-      <tag>算法</tag>
-      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
+      
+      <tag>算法</tag>
       
       <tag>二分</tag>
       
@@ -943,11 +970,11 @@
       
       <tag>技术</tag>
       
+      <tag>C++</tag>
+      
       <tag>Developer</tag>
       
       <tag>Programming</tag>
-      
-      <tag>C++</tag>
       
       <tag>C#</tag>
       
